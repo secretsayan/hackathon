@@ -7,8 +7,8 @@ const EventSchema = mongoose.Schema({
     endDate: String,
     status: String,
     description: String,
-    noOfTeams: String[],
-    maxTeamSize: String[],
+    noOfTeams: String,
+    maxTeamSize: String,
     prizes: String
 }); 
 
