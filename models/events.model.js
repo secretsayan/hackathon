@@ -1,4 +1,5 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
+const AutoIncrement = require('mongoose-sequence')(mongoose);
 
 const EventSchema = mongoose.Schema({
     id: Number,
@@ -11,5 +12,7 @@ const EventSchema = mongoose.Schema({
     maxTeamSize: String,
     prizes: String
 }); 
+
+EventSchema.plugin(AutoIncrement, {inc_field: 'id'});
 
 module.exports = mongoose.model('Event',EventSchema);

@@ -4,7 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const dbConfig = require('./config/db.config.js');
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
+const AutoIncrement = require('mongoose-sequence')(mongoose);
 var cors = require('cors');
 
 var indexRouter = require('./routes/index');
@@ -41,7 +42,7 @@ mongoose.connect(dbConfig.url, {
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/hack',hackathonRouter);
-app.use('/events',events);
+app.use('/event',events);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
