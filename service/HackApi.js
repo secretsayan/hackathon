@@ -21,6 +21,11 @@ module.exports = {
         let data = await Event.find();
         callback(data);
 
+    },
+    deleteMultiple : async function(ids, callback){
+        let response = await Event.deleteMany({id: ids});
+        let data = await Event.find();
+        callback(data);
     }
 
 };

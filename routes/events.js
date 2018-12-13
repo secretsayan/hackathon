@@ -43,4 +43,12 @@ router.delete('/delete/:id', function(req, res, next){
   });
 });
 
+/* Delete Event. */
+router.post('/deletemultiple', function(req, res, next){
+  HackApi.deleteMultiple(req.body, function(results){
+    console.log(results);
+    res.json(results);
+  });
+});
+
 module.exports = router;
