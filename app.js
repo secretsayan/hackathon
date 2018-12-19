@@ -40,7 +40,7 @@ mongoose.connect(dbConfig.url, {
 
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/user', usersRouter);
 app.use('/hack',hackathonRouter);
 app.use('/event',events);
 
