@@ -39,7 +39,7 @@ router.post('/edit/:id', function (req,res,next){
 router.delete('/delete/:id', function(req, res, next){
   HackApi.deleteEventById(req.params.id, function(results){
     console.log(results);
-    res.json(results);
+    res.json(results['data']);
   });
 });
 
@@ -47,7 +47,7 @@ router.delete('/delete/:id', function(req, res, next){
 router.post('/deletemultiple', function(req, res, next){
   HackApi.deleteMultiple(req.body, function(results){
     console.log(results);
-    res.json(results);
+    res.json(results['data']);
   });
 });
 

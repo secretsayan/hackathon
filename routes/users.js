@@ -1,14 +1,19 @@
 var express = require('express');
 var router = express.Router();
+const HackApi = require('../service/HackApi');
 
 /* Login */
 router.post('/login', function(req, res, next) {
+  
   res.json('Login Sucessful');
 });
 
 /* Signup */
 router.post('/signup', function(req,res,next){
-  res.json("Signup Successful")
+  HackApi.createUser(req.body, function(results){
+
+  });
+  
 });
 
 module.exports = router;
