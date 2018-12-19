@@ -3,8 +3,9 @@ const User = require('../models/user.model');
 
 module.exports = {
     getAllEvents: async function (callback) {
+        let res = [];
         try {
-            let response = await Event.find();
+            let response = await Event.find();            
             res['status'] = '200';
             res['message'] = response;
             callback(res);
@@ -17,6 +18,7 @@ module.exports = {
 
     },
     insertEvent: async function (issue, callback) {
+        let res = [];
         try {
             let response = await Event.create(issue);
             res['status'] = '200';
@@ -31,6 +33,7 @@ module.exports = {
 
     },
     getEventById: async function (id, callback) {
+        let res = [];
         try {
             let response = await Event.find({ id: id });
             res['status'] = '200';
@@ -45,6 +48,7 @@ module.exports = {
 
     },
     updateEventById: async function (id, issue, callback) {
+        let res = [];
         try {
             let response = await Event.findOneAndUpdate({ id: id }, issue);
             res['status'] = '200';
@@ -59,6 +63,7 @@ module.exports = {
 
     },
     deleteEventById: async function (id, callback) {
+        let res = [];
         try{
             let response = await Event.deleteOne({ id: id });
             let data = await Event.find();
@@ -76,6 +81,7 @@ module.exports = {
 
     },
     deleteMultiple: async function (ids, callback) {
+        let res = [];
         try{
             let response = await Event.deleteMany({ id: ids });
             let data = await Event.find();
@@ -92,6 +98,7 @@ module.exports = {
 
     },
     createUser: async function (values, callback) {
+        let res = [];
         try {
             let response = await User.create(values);
             res['status'] = '200';

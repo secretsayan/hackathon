@@ -6,7 +6,7 @@ const HackApi = require('../service/HackApi');
 router.get('/all', function (req, res, next) {
   HackApi.getAllEvents(function (results) {
     console.log(results);
-    res.json(results);
+    res.json(results['message']);
   });
 });
 
@@ -14,7 +14,7 @@ router.get('/all', function (req, res, next) {
 router.get('/edit/:id',function(req,res,next){
   HackApi.getEventById(req.params.id, function(results){
     console.log(results);
-    res.json(results);    
+    res.json(results['message']);    
   });
 });
 
