@@ -7,7 +7,6 @@ const UserSchema = mongoose.Schema({
     lastname: String,
     Location: String,
     Mobile: Number,
-    Role: {type: String, required: true},
 }); 
 
 module.exports = mongoose.model('User',UserSchema);
