@@ -3,10 +3,12 @@ var router = express.Router();
 const HackApi = require('../service/HackApi');
 const User = require('../models/user.model');
 const _ = require("lodash");
+const jwt = require("../config/jwt-module");
 
 /* Login */
 router.post('/login', function (req, res, next) {
   if(req.body.email === null){
+    res.sendStatus(401);
 
     req.json('Invalid Credentials');
   
@@ -18,10 +20,12 @@ router.post('/login', function (req, res, next) {
   //mongodb find and match user.
   User.findOne({email:useremail,password:userpassword},function(err,doc){
 
-    if(_.isEmpty(doc)){      
-      res.json('Invalid Credentials');
+    if(_.isEmpty(doc)){            
+      res.status(401).json('Invalid Credentials');
     }else{
-      res.json('Login Sucessful');
+      var token = jwt.sign({email: useremail, password: userpassword},{issuer:'Hackathon/Server/Login',subject:useremail,audience:'http://localhost'});
+      console.log("Token :" + token);
+      res.json('Login Sucessful token=' + token);
      
     }
     

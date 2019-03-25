@@ -1,8 +1,8 @@
 const fs 		= require('fs');
 const jwt 		= require('jsonwebtoken');
 
-var privateKEY 	= fs.readFileSync('./private.key', 'utf8'); // to sign JWT
-var publicKEY 	= fs.readFileSync('./public.key', 'utf8'); 	// to verify JWT
+var privateKEY 	= fs.readFileSync('./config/private.key', 'utf8'); // to sign JWT
+var publicKEY 	= fs.readFileSync('./config/public.key', 'utf8'); 	// to verify JWT
 
 module.exports = {
 	sign: (payload, $Options) => {
@@ -16,6 +16,9 @@ module.exports = {
 
 		// Token signing options
 		var signOptions = {
+			issuer: 	$Options.issuer,
+			subject: 	$Options.subject,
+			audience: 	$Options.audience,
 			expiresIn: 	"30d",				// 30 days validity
 			algorithm: 	"RS256" 			// RSASSA options[ "RS256", "RS384", "RS512" ]
 		};

@@ -107,7 +107,8 @@ module.exports = {
         }
         catch (e) {
             res['status'] = '502';
-            res['message'] = 'Exception Occured';
+            res['message'] = 'Registration Failed ! Please re-enter data correctly.';
+            console.log('error'+e);
             callback(res);
         }
     }
