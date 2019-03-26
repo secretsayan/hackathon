@@ -111,5 +111,18 @@ module.exports = {
             console.log('error'+e);
             callback(res);
         }
+    },
+    userProfile: async function(emailId, callback){
+        let res = [];
+        try {
+            let response =  await User.findOne({email: emailId},{_id: 0,Role:0,__v:0,password:0});
+            res['message'] = response;
+            callback(res);
+            console.log(res);
+        }
+        catch (e){
+
+        }
+
     }
 };

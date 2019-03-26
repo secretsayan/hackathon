@@ -23,17 +23,12 @@ router.post('/login', function (req, res, next) {
     if(_.isEmpty(doc)){            
       res.status(401).json('Invalid Credentials');
     }else{
-      var token = jwt.sign({email: useremail, password: userpassword},{issuer:'Hackathon/Server/Login',subject:useremail,audience:'http://localhost'});
+      var token = jwt.sign({email: useremail, password: userpassword});
       console.log("Token :" + token);
       res.json('Login Sucessful token=' + token);
      
-    }
-    
-
-  });
-
-
-  
+    }   
+  });  
 });
 
 /* Signup */
@@ -44,5 +39,37 @@ router.post('/signup', function (req, res, next) {
   });
 
 });
+
+/* View Registration Details */
+router.get('/profile', checkToken, function(req, res){
+  
+  HackApi.userProfile(req.email, function(results){
+    res.json(results['message']);
+    console.log('seen'+results);
+  });
+  
+
+});
+
+//Check to make sure header is not undefined, if so, return Forbidden (403)
+function checkToken (req, res, next)  {
+  const header = req.headers.authorization;
+
+  if(typeof header !== 'undefined') {
+      const bearer = header.split(' ');
+      if (bearer.length == 2){
+        var scheme = bearer[0];
+        var credentials = bearer[1]; 
+        if (/^Bearer$/i.test(scheme)) {
+          var userData = jwt.verify(credentials);
+          req.email = userData.email;
+          next();          
+        }
+      } else {
+        //If header is undefined return Forbidden (403)
+        res.sendStatus(403);
+      }     
+  } 
+}
 
 module.exports = router;
