@@ -116,13 +116,26 @@ module.exports = {
         let res = [];
         try {
             let response =  await User.findOne({email: emailId},{_id: 0,Role:0,__v:0,password:0});
+            res['status'] = '200';
             res['message'] = response;
             callback(res);
-            console.log(res);
+
         }
         catch (e){
 
         }
 
+    },
+    login: async function (userEmail,userPassword,callback){
+        let res = [];
+        try{
+            let response = await User.findOne({email: userEmail,password: userPassword},{role:1,_id:0});
+            res["message"] = response;
+            callback(res);
+        }
+        catch (e){
+            console.log(e);
+
+        }
     }
 };

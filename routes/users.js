@@ -10,7 +10,7 @@ router.post('/login', function (req, res, next) {
   if(req.body.email === null){
     res.sendStatus(401);
 
-    req.json('Invalid Credentials');
+    res.json('Invalid Credentials');
   
   }else{
     useremail = req.body.email;
@@ -18,16 +18,14 @@ router.post('/login', function (req, res, next) {
   }
 
   //mongodb find and match user.
-  User.findOne({email:useremail,password:userpassword},function(err,doc){
-
-    if(_.isEmpty(doc)){            
+  HackApi.login(useremail, userpassword, function(results){
+    var obj = JSON.parse(JSON.stringify(results['message']));
+    if(_.isEmpty(obj)){            
       res.status(401).json('Invalid Credentials');
     }else{
-      var token = jwt.sign({email: useremail, password: userpassword});
-      console.log("Token :" + token);
-      res.json('Login Sucessful token=' + token);
-     
-    }   
+      var token = jwt.sign({email: useremail, role: obj.Role});
+      res.json('Login Sucessful token='+token);
+    }         
   });  
 });
 
@@ -51,6 +49,29 @@ router.get('/profile', checkToken, function(req, res){
 
 });
 
+/* Login as Admin */
+router.post('/admin/login', function (req, res, next){
+  if(req.body.email !== 'admin@hack.com'){
+    res.sendStatus(401);
+    req.json('Invalid Credentials');
+  
+  }else{
+    useremail = req.body.email;
+    userpassword = req.body.password;
+  }
+
+  //mongodb find and match user.
+  HackApi.login(useremail, userpassword, function(results){
+    var obj = JSON.parse(JSON.stringify(results['message']));
+    if(_.isEmpty(obj)){            
+      res.status(401).json('Invalid Credentials');
+    }else{
+      var token = jwt.sign({email: useremail, role: obj.role});
+      res.json('Login Sucessful token='+token);
+    }         
+  });   
+}); 
+
 //Check to make sure header is not undefined, if so, return Forbidden (403)
 function checkToken (req, res, next)  {
   const header = req.headers.authorization;
@@ -63,6 +84,7 @@ function checkToken (req, res, next)  {
         if (/^Bearer$/i.test(scheme)) {
           var userData = jwt.verify(credentials);
           req.email = userData.email;
+          req.role = userData.role;
           next();          
         }
       } else {
