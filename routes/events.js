@@ -22,7 +22,7 @@ router.get('/edit/:id',function(req,res,next){
 router.post('/add', function (req, res, next) {
   HackApi.insertEvent(req.body, function (results) {
     console.log(results);
-    res.json('success');
+    res.status(results['status']).json(results['message']);
   });  
 });
 
@@ -30,7 +30,7 @@ router.post('/add', function (req, res, next) {
 router.post('/edit/:id', function (req,res,next){
   HackApi.updateEventById(req.params.id, req.body, function (results){
     console.log(results);
-    res.json('Success');
+    res.json(results['message']);
 
   });
 });

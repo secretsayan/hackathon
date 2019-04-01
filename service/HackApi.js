@@ -11,8 +11,8 @@ module.exports = {
             callback(res);
         }
         catch (e) {
-            res['status'] = '502';
-            res['message'] = 'Exception Occured';
+            res['status'] = '400';
+            res['message'] = 'Invalid Input '+ e;
             callback(res);
         }
 
@@ -26,8 +26,8 @@ module.exports = {
             callback(res);
         }
         catch (e) {
-            res['status'] = '502';
-            res['message'] = 'Exception Occured';
+            res['status'] = '400';
+            res['message'] = 'Invalid Input '+ e;
             callback(res);
         }
 
@@ -41,8 +41,8 @@ module.exports = {
             callback(res);
         }
         catch (e) {
-            res['status'] = '502';
-            res['message'] = 'Exception Occured';
+            res['status'] = '400';
+            res['message'] = 'Invalid Input '+ e;
             callback(res);
         }
 
@@ -56,8 +56,8 @@ module.exports = {
             callback(res);
         }
         catch (e) {
-            res['status'] = '502';
-            res['message'] = 'Exception Occured';
+            res['status'] = '400';
+            res['message'] = 'Invalid Input '+ e;
             callback(res);
         }
 
@@ -73,8 +73,8 @@ module.exports = {
             callback(res);
         }
         catch(e){
-            res['status'] = '502';
-            res['message'] = 'Exception Occured';
+            res['status'] = '400';
+            res['message'] = 'Invalid Input '+ e;
             callback(res);
         }
 
@@ -91,8 +91,8 @@ module.exports = {
             callback(res);
         }
         catch(e){
-            res['status'] = '502';
-            res['message'] = 'Exception Occured';
+            res['status'] = '400';
+            res['message'] = 'Invalid Input '+ e;
             callback(res);
         }
 
@@ -107,7 +107,7 @@ module.exports = {
         }
         catch (e) {
             res['status'] = '502';
-            res['message'] = 'Registration Failed ! Please re-enter data correctly.';
+            res['message'] = 'Registration Failed ! Please re-enter data correctly. '+e;
             console.log('error'+e);
             callback(res);
         }
@@ -121,8 +121,11 @@ module.exports = {
             callback(res);
 
         }
-        catch (e){
-
+        catch (e) {
+            res['status'] = '400';
+            res['message'] = 'Login Failed! '+e;
+            console.log('error'+e);
+            callback(res);
         }
 
     },
@@ -135,6 +138,9 @@ module.exports = {
         }
         catch (e){
             console.log(e);
+            res['status'] = '400';
+            res['message'] = 'Login Failed! '+e;
+            console.log('error'+e);
 
         }
     }
