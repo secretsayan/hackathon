@@ -9,9 +9,7 @@ const jwt = require("../config/jwt-module");
 router.post('/login', function (req, res, next) {
   if(req.body.email === null){
     res.sendStatus(401);
-
-    res.json('Invalid Credentials');
-  
+    res.json('Invalid Credentials');  
   }else{
     useremail = req.body.email;
     userpassword = req.body.password;
@@ -67,7 +65,7 @@ router.post('/admin/login', function (req, res, next){
       res.status(401).json('Invalid Credentials');
     }else{
       var token = jwt.sign({email: useremail, role: obj.role});
-      res.json('Login Sucessful token='+token);
+      res.json('Login Sucessful for admin token='+token);
     }         
   });   
 }); 
@@ -95,3 +93,4 @@ function checkToken (req, res, next)  {
 }
 
 module.exports = router;
+module.exports.checkToken = checkToken;

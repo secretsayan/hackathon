@@ -106,8 +106,8 @@ module.exports = {
             callback(res);
         }
         catch (e) {
-            res['status'] = '502';
-            res['message'] = 'Registration Failed ! Please re-enter data correctly. '+e;
+            res['status'] = '400';
+            res['message'] = 'Login Failed! '+e;
             console.log('error'+e);
             callback(res);
         }
@@ -143,5 +143,20 @@ module.exports = {
             console.log('error'+e);
 
         }
-    }
+    },
+    manageHackList: async function(userEmail, callback){
+        let res = [];
+        try{
+            let response = await Event.find({hackathonHost: userEmail});
+            res["message"] = response;
+            callback(res);
+        }
+        catch (e){
+            res['status'] = '400';
+            res['message'] = 'Failed '+e;
+            console.log('error'+e);
+
+        }
+    } 
+
 };
