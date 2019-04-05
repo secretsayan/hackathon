@@ -17,10 +17,11 @@ module.exports = {
         }
 
     },
-    insertEvent: async function (issue, callback) {
+    insertEvent: async function (event, callback) {
         let res = [];
         try {
-            let response = await Event.create(issue);
+            let response = await Event.create(event);
+            console.log(response);
             res['status'] = '200';
             res['message'] = response;
             callback(res);

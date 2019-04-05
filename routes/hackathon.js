@@ -5,8 +5,9 @@ const HackApi =  require('../service/HackApi');
 
 /* GET home page. */
 router.get('/list', checkToken, function(req, res, next) {
+  
   HackApi.manageHackList(req.email, function(results){
-    res.json(results);
+    res.json(results["message"]);
   });
 });
 

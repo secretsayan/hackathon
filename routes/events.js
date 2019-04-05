@@ -1,25 +1,27 @@
 var express = require('express');
 var router = express.Router();
 const HackApi = require('../service/HackApi');
+const checkAdmin = require('./users').checkAdmin;
+
 
 /* GET events listing. */
 router.get('/all', function (req, res, next) {
   HackApi.getAllEvents(function (results) {
     console.log(results);
-    res.json(results['message']);
+    res.status(results['status']).json(results['message']);
   });
 });
 
 /* Get Event By ID. */
-router.get('/edit/:id',function(req,res,next){
+router.get('/edit/:id', checkAdmin, function(req,res,next){
   HackApi.getEventById(req.params.id, function(results){
     console.log(results);
-    res.json(results['message']);    
+    res.status(results['status']).json(results['message']);    
   });
 });
 
 /* Insert events. */
-router.post('/add', function (req, res, next) {
+router.post('/add', checkAdmin, function (req, res, next) {
   HackApi.insertEvent(req.body, function (results) {
     console.log(results);
     res.status(results['status']).json(results['message']);
@@ -27,16 +29,16 @@ router.post('/add', function (req, res, next) {
 });
 
 /* Update Events. */
-router.post('/edit/:id', function (req,res,next){
+router.post('/edit/:id', checkAdmin, function (req,res,next){
   HackApi.updateEventById(req.params.id, req.body, function (results){
     console.log(results);
-    res.json(results['message']);
+    res.status(results['status']).json(results['message']);
 
   });
 });
 
 /* Delete Event. */
-router.delete('/delete/:id', function(req, res, next){
+router.delete('/delete/:id', checkAdmin, function(req, res, next){
   HackApi.deleteEventById(req.params.id, function(results){
     console.log(results);
     res.json(results['data']);
@@ -44,7 +46,7 @@ router.delete('/delete/:id', function(req, res, next){
 });
 
 /* Delete Event. */
-router.post('/deletemultiple', function(req, res, next){
+router.post('/deletemultiple', checkAdmin, function(req, res, next){
   HackApi.deleteMultiple(req.body, function(results){
     console.log(results);
     res.json(results['data']);

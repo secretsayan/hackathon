@@ -91,6 +91,27 @@ function checkToken (req, res, next)  {
       }     
   } 
 }
+// Check Admin
+function checkAdmin (req, res, next) {
+  const header = req.headers.authorization;
+  if(typeof header !== 'undefined') {
+    const bearer = header.split(' ');
+    if (bearer.length == 2){
+      var scheme = bearer[0];
+      var credentials = bearer[1]; 
+      if (/^Bearer$/i.test(scheme)) {
+        var userData = jwt.verify(credentials);
+        if (userData.role == 'admin'){
+        next(); 
+        return;
+        }          
+      }
+    } 
+  }
+  console.log("Failed");
+  res.sendStatus(403);
+}
 
 module.exports = router;
 module.exports.checkToken = checkToken;
+module.exports.checkAdmin = checkAdmin;

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const AutoIncrement = require('mongoose-sequence')(mongoose);
 
-const EventSchema = mongoose.Schema({
+const EventDetailSchema = mongoose.Schema({
     eventId: {type: Number, unique: true },
     name: {type: String, required: true },
     startDate: {type: String, required: true},
@@ -11,9 +11,7 @@ const EventSchema = mongoose.Schema({
     noOfTeams: {type: Number, required: true},
     maxTeamSize: {type: Number, required: true},
     prizes: String,
-    hackathonHost: {type: String, required: true}
+    hackathonEvaluator: {type: String, required: true}
 }); 
 
-EventSchema.plugin(AutoIncrement, {inc_field: 'eventId'});
-
-module.exports = mongoose.model('Event',EventSchema);
+module.exports = mongoose.model('Event',EventDetailSchema);
