@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const AutoIncrement = require('mongoose-sequence')(mongoose);
 
 const EventSchema = mongoose.Schema({
-    eventId: {type: Number, unique: true },
+    eventId: {type: Number, unique: true},
     name: {type: String, required: true },
     startDate: {type: String, required: true},
     endDate: {type: String, required: true},

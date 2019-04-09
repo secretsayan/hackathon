@@ -36,7 +36,7 @@ module.exports = {
     getEventById: async function (id, callback) {
         let res = [];
         try {
-            let response = await Event.find({ id: id });
+            let response = await Event.findOne({ id: id });
             res['status'] = '200';
             res['message'] = response;
             callback(res);
@@ -148,7 +148,8 @@ module.exports = {
     manageHackList: async function(userEmail, callback){
         let res = [];
         try{
-            let response = await Event.find({hackathonHost: userEmail});
+            res['status'] = '200';
+            let response = await Event.findOne({hackathonHost: userEmail});
             res["message"] = response;
             callback(res);
         }

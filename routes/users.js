@@ -14,7 +14,6 @@ router.post('/login', function (req, res, next) {
     useremail = req.body.email;
     userpassword = req.body.password;
   }
-
   //mongodb find and match user.
   HackApi.login(useremail, userpassword, function(results){
     var obj = JSON.parse(JSON.stringify(results['message']));
