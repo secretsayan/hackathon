@@ -1,3 +1,3 @@
 module.exports = {
-    url:'mongodb://localhost:27017/hack'
+    url:'mongodb+srv://root:<password>@cluster0-zuabs.mongodb.net/test?retryWrites=true'
 };
