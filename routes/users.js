@@ -71,7 +71,11 @@ router.post('/admin/login', function (req, res, next){
 }); 
 
 router.get('/mail',function(req, res, next){
-    sendEMail();
+  sendEMail(function(results){
+    res.json(results);
+  });
+  
+
 });
 
 //Check to make sure header is not undefined, if so, return Forbidden (403)
@@ -116,30 +120,27 @@ function checkAdmin (req, res, next) {
   res.sendStatus(403);
 }
 
-async function sendEMail (req, res, next){
+async function sendEMail (callback){
   try{
-
   let testAccount = await nodemailer.createTestAccount();
-
   // create reusable transporter object using the default SMTP transport
   let transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 465,
     secure: true, // true for 465, false for other ports
-    proxy: 'http://proxy1.wipro.com',
+    //proxy: ,
     auth: {
-      user: 'secretsayan@gmail.com', // generated ethereal user
-      pass: 'Hadoop@10' // generated ethereal password
+      //user: 
+      //pass: 
     }
   });
-
   // send mail with defined transport object
   let info = await transporter.sendMail({
-    from: '"Fred Foo 👻" <secretsayan@gmail.com>', // sender address
+    from: '"Sayan Goswami" <sayandrupal@gmail.com>', // sender address
     to: "sayan.goswami@wipro.com", // list of receivers
-    subject: "Hello ✔", // Subject line
-    text: "Hello world?", // plain text body
-    html: "<b>Hello world?</b>" // html body
+    subject: "Nodemailer Test", // Subject line
+    text: "Hello This is a test mail.", // plain text body
+    html: "<b>Hello This is a test mail.</b>" // html body
   });
 
   console.log("Message sent: %s", info.messageId);
@@ -148,9 +149,12 @@ async function sendEMail (req, res, next){
   // Preview only available when sending through an Ethereal account
   console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
 
-  res.json("Hello Mail");
+  callback("Mail Sent");
+
 }catch(e){
   console.log(e);
+  callback("Sending Failed");
+
 }
   
 
