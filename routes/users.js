@@ -121,7 +121,8 @@ function checkAdmin (req, res, next) {
       var credentials = bearer[1]; 
       if (/^Bearer$/i.test(scheme)) {
         var userData = jwt.verify(credentials);
-        if (userData.role == 'admin'){        
+        console.log(userData);
+        if (userData.role.indexOf('admin') > -1){        
         next(); 
         return;
         }          
