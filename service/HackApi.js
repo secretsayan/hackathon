@@ -36,7 +36,7 @@ module.exports = {
     getEventById: async function (id, callback) {
         let res = [];
         try {
-            let response = await Event.findOne({ id: id });
+            let response = await Event.findOne({ eventId: id });
             res['status'] = '200';
             res['message'] = response;
             callback(res);
@@ -48,10 +48,10 @@ module.exports = {
         }
 
     },
-    updateEventById: async function (id, issue, callback) {
+    updateEventById: async function (id, event, callback) {
         let res = [];
         try {
-            let response = await Event.findOneAndUpdate({ id: id }, issue);
+            let response = await Event.updateOne({ eventId: id }, event);
             res['status'] = '200';
             res['message'] = response;
             callback(res);
@@ -66,7 +66,7 @@ module.exports = {
     deleteEventById: async function (id, callback) {
         let res = [];
         try{
-            let response = await Event.deleteOne({ id: id });
+            let response = await Event.deleteOne({ eventId: id });
             let data = await Event.find();
             res['status'] = '200';
             res['message'] = response;
@@ -84,7 +84,7 @@ module.exports = {
     deleteMultiple: async function (ids, callback) {
         let res = [];
         try{
-            let response = await Event.deleteMany({ id: ids });
+            let response = await Event.deleteMany({ eventId: ids });
             let data = await Event.find();
             res['status'] = '200';
             res['message'] = response;
@@ -133,7 +133,7 @@ module.exports = {
     login: async function (userEmail,userPassword,callback){
         let res = [];
         try{
-            let response = await User.findOne({email: userEmail,password: userPassword},{role:1,_id:0});
+            let response = await User.findOne({email: userEmail,password: userPassword},{firstname:1,role:1,_id:0});
             res["message"] = response;
             callback(res);
         }

@@ -21,8 +21,15 @@ router.post('/login', function (req, res, next) {
     if(_.isEmpty(obj)){            
       res.status(401).json('Invalid Credentials');
     }else{
-      var token = jwt.sign({email: useremail, role: obj.Role});
-      res.json('Login Sucessful token='+token);
+      var token = jwt.sign({email: useremail, role: obj.role});
+      //res.status(200).json('Login Sucessful token='+token);
+      res.status(200).json({
+        idToken: token, 
+        firstname: obj.firstname,
+        email: obj.email,
+        expiresIn: 1200
+      });
+      
     }         
   });  
 });
@@ -61,7 +68,7 @@ router.post('/admin/login', function (req, res, next){
   //mongodb find and match user.
   HackApi.login(useremail, userpassword, function(results){
     var obj = JSON.parse(JSON.stringify(results['message']));
-    if(_.isEmpty(obj)){            
+      if(_.isEmpty(obj)){            
       res.status(401).json('Invalid Credentials');
     }else{
       var token = jwt.sign({email: useremail, role: obj.role});
@@ -101,6 +108,7 @@ function checkToken (req, res, next)  {
 }
 // Check Admin
 function checkAdmin (req, res, next) {
+
   const header = req.headers.authorization;
   if(typeof header !== 'undefined') {
     const bearer = header.split(' ');
@@ -109,14 +117,14 @@ function checkAdmin (req, res, next) {
       var credentials = bearer[1]; 
       if (/^Bearer$/i.test(scheme)) {
         var userData = jwt.verify(credentials);
-        if (userData.role == 'admin'){
+        if (userData.role == 'admin'){        
         next(); 
         return;
         }          
       }
     } 
   }
-  console.log("Failed");
+  console.log("Failed in CheckAdmin");
   res.sendStatus(403);
 }
 

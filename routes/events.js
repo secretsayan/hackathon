@@ -7,7 +7,7 @@ const checkAdmin = require('./users').checkAdmin;
 /* GET events listing. */
 router.get('/all', function (req, res, next) {
   HackApi.getAllEvents(function (results) {
-    console.log(results);
+    //console.log(results);
     res.status(results['status']).json(results['message']);
   });
 });
@@ -22,6 +22,7 @@ router.get('/edit/:id', checkAdmin, function(req,res,next){
 
 /* Insert events. */
 router.post('/add', checkAdmin, function (req, res, next) {
+  
   HackApi.insertEvent(req.body, function (results) {
     console.log(results);
     res.status(results['status']).json(results['message']);
@@ -30,6 +31,7 @@ router.post('/add', checkAdmin, function (req, res, next) {
 
 /* Update Events. */
 router.post('/edit/:id', checkAdmin, function (req,res,next){
+  console.log(JSON.stringify(req.body));
   HackApi.updateEventById(req.params.id, req.body, function (results){
     console.log(results);
     res.status(results['status']).json(results['message']);
@@ -39,6 +41,7 @@ router.post('/edit/:id', checkAdmin, function (req,res,next){
 
 /* Delete Event. */
 router.delete('/delete/:id', checkAdmin, function(req, res, next){
+  console.log("Here");
   HackApi.deleteEventById(req.params.id, function(results){
     console.log(results);
     res.json(results['data']);
