@@ -36,8 +36,12 @@ router.post('/login', function (req, res, next) {
 
 /* Signup */
 router.post('/signup', function (req, res, next) {
+
   HackApi.createUser(req.body, function (results) {
     console.log(results);
+    sendEMail(results['message'].email,function(res){
+      console.log(res);
+    });
     res.json(results['message']);
   });
 
@@ -128,7 +132,7 @@ function checkAdmin (req, res, next) {
   res.sendStatus(403);
 }
 
-async function sendEMail (callback){
+async function sendEMail (userEmail, callback){
   try{
   let testAccount = await nodemailer.createTestAccount();
   // create reusable transporter object using the default SMTP transport
@@ -138,17 +142,18 @@ async function sendEMail (callback){
     secure: true, // true for 465, false for other ports
     //proxy: ,
     auth: {
-      //user: 
-      //pass: 
+      user: "sayancts10@gmail.com",
+      pass: "Donothackme@100"
     }
   });
+  console.log("user"+userEmail);
   // send mail with defined transport object
   let info = await transporter.sendMail({
-    from: '"Sayan Goswami" <sayandrupal@gmail.com>', // sender address
-    to: "sayan.goswami@wipro.com", // list of receivers
-    subject: "Nodemailer Test", // Subject line
-    text: "Hello This is a test mail.", // plain text body
-    html: "<b>Hello This is a test mail.</b>" // html body
+    from: '"Sayan Goswami" <secretsayan@gmail.com>', // sender address
+    to: userEmail, // list of receivers
+    subject: "Hackathon Signup Successful", // Subject line
+    text: "You have successfully registered to Hackathon.", // plain text body
+    html: "<b>You have successfully registered to Hackathon.</b>" // html body
   });
 
   console.log("Message sent: %s", info.messageId);
