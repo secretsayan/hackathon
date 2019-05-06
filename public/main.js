@@ -978,7 +978,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var EventsService = /** @class */ (function () {
     function EventsService(_http) {
         this._http = _http;
-        this._eventsUrl = "http://localhost:3000/event";
+        this._eventsUrl = "event";
         this.count = 100;
         this.httpOptions = {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
@@ -1422,7 +1422,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var UsersService = /** @class */ (function () {
     function UsersService(_http) {
         this._http = _http;
-        this._usersUrl = "http://localhost:3000/user";
+        this._usersUrl = "user";
         this.httpOptions = {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpHeaders"]({
                 'Content-Type': 'application/json'
