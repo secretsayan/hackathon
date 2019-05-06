@@ -399,7 +399,7 @@ var AppComponent = /** @class */ (function () {
         this.isLoggedIn = false;
         this.firstName = "";
     }
-    AppComponent.prototype.ngOnInit = function () {
+    AppComponent.prototype.ngDoCheck = function () {
         this.isLoggedIn = this._userService.isLoggedIn();
         this.firstName = this._userService.getFirstName();
     };
@@ -641,7 +641,7 @@ var AddEventFormComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class='panel panel-primary'>    \r\n\t<div class='panel-heading'>\r\n\t\t{{title}}\r\n\t</div>\r\n\t<div class='panel-body'>    \r\n\t\t<form #formRef=\"ngForm\" (ngSubmit)=\"onSubmit(formRef.value)\">\r\n\t\t\t<div class=\"form-group\">\r\n\t\t\t  <label for=\"name\">Name</label>\r\n\t\t\t  <input type=\"text\" class=\"form-control\" id=\"name\" name=\"name\" [(ngModel)]=\"event.name\" required minlength=\"3\" #nameRef=\"ngModel\">\r\n\t\t\t  <div *ngIf=\"nameRef.invalid && (nameRef.dirty || nameRef.touched)\" class=\"alert alert-danger\">\r\n\t\t\t\t<div *ngIf=\"nameRef.errors.required\">\r\n\t\t\t\t  Name of the event is required.\r\n\t\t\t\t</div>\r\n\t\t\t\t<div *ngIf=\"nameRef.errors.minlength\">\r\n\t\t\t\t  Name must be at least 3 characters long.\r\n\t\t\t\t</div>\r\n\t\t\t  </div>\r\n\t\t\t</div>\r\n\t\t\t<div class=\"form-group\">\r\n\t\t\t  <label for=\"description\">Description</label>\r\n\t\t\t  <input type=\"text\" class=\"form-control\" id=\"description\" name=\"description\" [(ngModel)]=\"event.description\" required minlength=\"3\" #descRef=\"ngModel\">\r\n\t\t\t  <div *ngIf=\"descRef.invalid && (descRef.dirty || descRef.touched)\" class=\"alert alert-danger\">\r\n\t\t\t\t<div *ngIf=\"descRef.errors.required\">\r\n\t\t\t\t  Description is required.\r\n\t\t\t\t</div>\r\n\t\t\t\t<div *ngIf=\"descRef.errors.minlength\">\r\n\t\t\t\t  Description must be at least 3 characters long.\r\n\t\t\t\t</div>\r\n\t\t\t  </div>\r\n\t\t\t</div>\r\n\t\t\t<div class=\"form-group\">\r\n\t\t\t  <label for=\"startDate\">Start Date</label>\r\n\t\t\t  <input type=\"date\" placeholder=\"dd-MMM-yyyy\" class=\"form-control\" id=\"startDate\" name=\"startDate\" [(ngModel)]=\"event.startDate\" required #startDateRef=\"ngModel\">\r\n\t\t\t  <div *ngIf=\"startDateRef.invalid && (startDateRef.dirty || startDateRef.touched)\" class=\"alert alert-danger\">\r\n\t\t\t\t<div *ngIf=\"startDateRef.errors.required\">\r\n\t\t\t\t  Start Date is required.\r\n\t\t\t\t</div>\r\n\t\t\t\t<div *ngIf=\"startDateRef.errors.createdDate\">\r\n\t\t\t\t  Start Date is invalid.\r\n\t\t\t\t</div>\r\n\t\t\t  </div>\r\n\t\t\t</div>\r\n\t\t\t<div class=\"form-group\">\r\n\t\t\t  <label for=\"endDate\">End Date</label>\r\n\t\t\t  <input type=\"date\" placeholder=\"dd-MMM-yyyy\" class=\"form-control\" id=\"endDate\" name=\"endDate\" [(ngModel)]=\"event.endDate\" #endDateRef=\"ngModel\">\r\n\t\t\t  <div *ngIf=\"endDateRef.invalid && (endDateRef.dirty || endDateRef.touched)\" class=\"alert alert-danger\">\t\t\t\t\r\n\t\t\t\t<div *ngIf=\"endDateRef.errors.date\">\r\n\t\t\t\t  End Date is invalid.\r\n\t\t\t\t</div>\r\n\t\t\t  </div>\r\n\t\t\t</div>\r\n\t\t\t<div class=\"form-group\">\r\n\t\t\t  <label for=\"status\">Status</label>\r\n\t\t\t  <select class=\"form-control\" name=\"status\" [ngModel]=\"event.status\">\r\n\t\t\t\t<option *ngFor=\"let status of statuses\" [value]=\"status\">\r\n\t\t\t\t  {{status}}\r\n\t\t\t\t</option>\r\n\t\t\t  </select>\r\n\t\t\t</div>\r\n\t\t\t<div class=\"form-group\">\r\n\t\t\t  <label for=\"noOfTeams\">No. of Teams</label>          \r\n\t\t\t  <input type=\"number\" class=\"form-control\" id=\"noOfTeams\" name=\"noOfTeams\" [(ngModel)]=\"event.noOfTeams\">\t\t\t  \r\n\t\t\t</div>\r\n\t\t\t<div class=\"form-group\">\r\n\t\t\t  <label for=\"maxTeamSize\">Max Team Size</label>          \r\n\t\t\t  <input type=\"number\" class=\"form-control\" id=\"maxTeamSize\" name=\"maxTeamSize\" [(ngModel)]=\"event.maxTeamSize\">\t\t\t  \r\n\t\t\t</div>\r\n\t\t\t<div class=\"form-group\">\r\n\t\t\t  <label for=\"prizes\">Prizes</label>          \r\n\t\t\t  <input type=\"number\" class=\"form-control\" id=\"prizes\" name=\"prizes\" [(ngModel)]=\"event.prizes\">\t\t\t  \r\n\t\t\t</div>\r\n\t\t\t<div class=\"form-group\">\r\n\t\t\t  <label for=\"hackathonHost\">Hackathon Host (Email)</label>          \r\n\t\t\t  <input type=\"email\" class=\"form-control\" id=\"hackathonHost\" name=\"hackathonHost\" [(ngModel)]=\"event.hackathonHost\">\r\n\t\t\t  \r\n\t\t\t</div>\r\n\t\t\t\r\n\t\t\t<button type=\"submit\" class=\"btn btn-info\" [disabled]=\"formRef.invalid\">Submit</button>\r\n\t\t</form>    \r\n\t</div>\r\n</div>\r\n"
+module.exports = "<div class='panel panel-primary'>    \r\n\t<div class='panel-heading'>\r\n\t\t{{title}}\r\n\t</div>\r\n\t<div class='panel-body'>    \r\n\t\t<form #formRef=\"ngForm\" (ngSubmit)=\"onSubmit(formRef.value)\">\r\n\t\t\t<div class=\"form-group\">\r\n\t\t\t  <label for=\"name\">Name</label>\r\n\t\t\t  <input type=\"text\" class=\"form-control\" id=\"name\" name=\"name\" [(ngModel)]=\"event.name\" required minlength=\"3\" #nameRef=\"ngModel\">\r\n\t\t\t  <div *ngIf=\"nameRef.invalid && (nameRef.dirty || nameRef.touched)\" class=\"alert alert-danger\">\r\n\t\t\t\t<div *ngIf=\"nameRef.errors.required\">\r\n\t\t\t\t  Name of the event is required.\r\n\t\t\t\t</div>\r\n\t\t\t\t<div *ngIf=\"nameRef.errors.minlength\">\r\n\t\t\t\t  Name must be at least 3 characters long.\r\n\t\t\t\t</div>\r\n\t\t\t  </div>\r\n\t\t\t</div>\r\n\t\t\t<div class=\"form-group\">\r\n\t\t\t  <label for=\"description\">Description</label>\r\n\t\t\t  <input type=\"text\" class=\"form-control\" id=\"description\" name=\"description\" [(ngModel)]=\"event.description\" required minlength=\"3\" #descRef=\"ngModel\">\r\n\t\t\t  <div *ngIf=\"descRef.invalid && (descRef.dirty || descRef.touched)\" class=\"alert alert-danger\">\r\n\t\t\t\t<div *ngIf=\"descRef.errors.required\">\r\n\t\t\t\t  Description is required.\r\n\t\t\t\t</div>\r\n\t\t\t\t<div *ngIf=\"descRef.errors.minlength\">\r\n\t\t\t\t  Description must be at least 3 characters long.\r\n\t\t\t\t</div>\r\n\t\t\t  </div>\r\n\t\t\t</div>\r\n\t\t\t<div class=\"form-group\">\r\n\t\t\t  <label for=\"startDate\">Start Date</label>\r\n\t\t\t  <input type=\"date\" placeholder=\"mm/dd/yyyy\" class=\"form-control\" id=\"startDate\" name=\"startDate\" [ngModel]=\"event.startDate\" required #startDateRef=\"ngModel\">\r\n\t\t\t  <div *ngIf=\"startDateRef.invalid && (startDateRef.dirty || startDateRef.touched)\" class=\"alert alert-danger\">\r\n\t\t\t\t<div *ngIf=\"startDateRef.errors.required\">\r\n\t\t\t\t  Start Date is required.\r\n\t\t\t\t</div>\r\n\t\t\t\t<div *ngIf=\"startDateRef.errors.createdDate\">\r\n\t\t\t\t  Start Date is invalid.\r\n\t\t\t\t</div>\r\n\t\t\t  </div>\r\n\t\t\t</div>\r\n\t\t\t<div class=\"form-group\">\r\n\t\t\t  <label for=\"endDate\">End Date</label>\r\n\t\t\t  <input type=\"date\" placeholder=\"mm/dd/yyyy\" class=\"form-control\" id=\"endDate\" name=\"endDate\" [(ngModel)]=\"event.endDate\" #endDateRef=\"ngModel\">\r\n\t\t\t  <div *ngIf=\"endDateRef.invalid && (endDateRef.dirty || endDateRef.touched)\" class=\"alert alert-danger\">\t\t\t\t\r\n\t\t\t\t<div *ngIf=\"endDateRef.errors.date\">\r\n\t\t\t\t  End Date is invalid.\r\n\t\t\t\t</div>\r\n\t\t\t  </div>\r\n\t\t\t</div>\r\n\t\t\t<div class=\"form-group\">\r\n\t\t\t  <label for=\"status\">Status</label>\r\n\t\t\t  <select class=\"form-control\" name=\"status\" [ngModel]=\"event.status\">\r\n\t\t\t\t<option *ngFor=\"let status of statuses\" [value]=\"status\">\r\n\t\t\t\t  {{status}}\r\n\t\t\t\t</option>\r\n\t\t\t  </select>\r\n\t\t\t</div>\r\n\t\t\t<div class=\"form-group\">\r\n\t\t\t  <label for=\"noOfTeams\">No. of Teams</label>          \r\n\t\t\t  <input type=\"number\" class=\"form-control\" id=\"noOfTeams\" name=\"noOfTeams\" [(ngModel)]=\"event.noOfTeams\">\t\t\t  \r\n\t\t\t</div>\r\n\t\t\t<div class=\"form-group\">\r\n\t\t\t  <label for=\"maxTeamSize\">Max Team Size</label>          \r\n\t\t\t  <input type=\"number\" class=\"form-control\" id=\"maxTeamSize\" name=\"maxTeamSize\" [(ngModel)]=\"event.maxTeamSize\">\t\t\t  \r\n\t\t\t</div>\r\n\t\t\t<div class=\"form-group\">\r\n\t\t\t  <label for=\"prizes\">Prizes</label>          \r\n\t\t\t  <input type=\"text\" class=\"form-control\" id=\"prizes\" name=\"prizes\" [(ngModel)]=\"event.prizes\">\t\t\t  \r\n\t\t\t</div>\r\n\t\t\t<div class=\"form-group\">\r\n\t\t\t  <label for=\"hackathonHost\">Hackathon Host (Email)</label>          \r\n\t\t\t  <input type=\"email\" class=\"form-control\" id=\"hackathonHost\" name=\"hackathonHost\" [(ngModel)]=\"event.hackathonHost\">\r\n\t\t\t  \r\n\t\t\t</div>\r\n\t\t\t\r\n\t\t\t<button type=\"submit\" class=\"btn btn-info\" [disabled]=\"formRef.invalid\">Submit</button>\r\n\t\t</form>    \r\n\t</div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -677,20 +677,24 @@ var EditEventFormComponent = /** @class */ (function () {
         this.router = router;
         this.title = "Editing an Event";
         this.statuses = ["Open", "In Progress", "Closed"];
-        this.event = { name: "", description: "", startDate: "", endDate: "", status: "", noOfTeams: "", maxTeamSize: "", prizes: "", hackathonHost: "" };
     }
     EditEventFormComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.route.params.forEach(function (params) {
             _this.id = +params['id'];
         });
-        this._eventService.getEvent(this.id).subscribe(function (ev) { _this.event = ev; console.log(_this.event); });
+        this._eventService.getEvent(this.id).subscribe(function (ev) {
+            ev.startDate = new Date(ev.startDate).toISOString().split('T')[0];
+            ev.endDate = new Date(ev.endDate).toISOString().split('T')[0];
+            _this.event = ev;
+            console.log(_this.event);
+        });
     };
     EditEventFormComponent.prototype.onSubmit = function (formValue) {
         var _this = this;
         console.log("Form Value = " + JSON.stringify(formValue, null, 4));
         var updatedEvent = {
-            id: this.id,
+            eventId: this.id,
             name: formValue.name,
             description: formValue.description,
             startDate: formValue.startDate,
@@ -739,7 +743,7 @@ module.exports = "label {\r\n  display: inline-block;\r\n  width: 3em;\r\n  marg
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class='panel panel-primary'>\r\n    \r\n\t<div class='panel-heading'>\r\n      Event Details\r\n\t</div>\r\n\t<div class='panel-body'>\t\t\r\n\t\t<table class=\"table\" style=\"margin-left:20px\">\r\n\t\t  <tr>\r\n\t\t\t<td>ID:</td>\r\n\t\t\t<td>{{event.id}}</td>\r\n\t\t  </tr>\r\n\t\t  <tr>\r\n\t\t\t<td>Name:</td>\r\n\t\t\t<td>{{event.name}}</td>\r\n\t\t  </tr>\r\n\t\t  <tr>\r\n\t\t\t<td>Description:</td>\r\n\t\t\t<td>{{event.description}}</td>\r\n\t\t  </tr>\r\n\t\t  <tr>\r\n\t\t\t<td>Start Date:</td>\r\n\t\t\t<td>{{event.startDate}}</td>\r\n\t\t  </tr>\r\n\t\t  <tr>\r\n\t\t\t<td>End Date:</td>\r\n\t\t\t<td>{{event.endDate}}</td>\r\n\t\t  </tr>\r\n\t\t  <tr>\r\n\t\t\t<td>Status:</td>\r\n\t\t\t<td>{{event.status}}</td>\r\n\t\t  </tr>\r\n\t\t  <tr>\r\n\t\t\t<td>No. of Teams:</td>\r\n\t\t\t<td>{{event.noOfTeams}}</td>\r\n\t\t  </tr>\r\n\t\t  <tr>\r\n\t\t\t<td>Max Team Size:</td>\r\n\t\t\t<td>{{event.maxTeamSize}}</td>\r\n\t\t  </tr>\r\n\t\t  <tr>\r\n\t\t\t<td>Prizes:</td>\r\n\t\t\t<td>{{event.prizes}}</td>\r\n\t\t  </tr>\r\n\t\t  <tr>\r\n\t\t\t<td>Hackathon Host:</td>\r\n\t\t\t<td>{{event.hackathonHost}}</td>\r\n\t\t  </tr>\r\n\t\t \r\n\t\t</table>\r\n\t\t<button (click)=\"goBack()\">Back</button>\r\n\t</div>\r\n</div>\r\n"
+module.exports = "<div class='panel panel-primary'>\r\n    \r\n\t<div class='panel-heading'>\r\n      Event Details\r\n\t</div>\r\n\t<div class='panel-body'>\t\t\r\n\t\t<table class=\"table\" style=\"margin-left:20px\">\r\n\t\t  <tr>\r\n\t\t\t<td>ID:</td>\r\n\t\t\t<td>{{event.eventId}}</td>\r\n\t\t  </tr>\r\n\t\t  <tr>\r\n\t\t\t<td>Name:</td>\r\n\t\t\t<td>{{event.name}}</td>\r\n\t\t  </tr>\r\n\t\t  <tr>\r\n\t\t\t<td>Description:</td>\r\n\t\t\t<td>{{event.description}}</td>\r\n\t\t  </tr>\r\n\t\t  <tr>\r\n\t\t\t<td>Start Date:</td>\r\n\t\t\t<td>{{event.startDate}}</td>\r\n\t\t  </tr>\r\n\t\t  <tr>\r\n\t\t\t<td>End Date:</td>\r\n\t\t\t<td>{{event.endDate}}</td>\r\n\t\t  </tr>\r\n\t\t  <tr>\r\n\t\t\t<td>Status:</td>\r\n\t\t\t<td>{{event.status}}</td>\r\n\t\t  </tr>\r\n\t\t  <tr>\r\n\t\t\t<td>No. of Teams:</td>\r\n\t\t\t<td>{{event.noOfTeams}}</td>\r\n\t\t  </tr>\r\n\t\t  <tr>\r\n\t\t\t<td>Max Team Size:</td>\r\n\t\t\t<td>{{event.maxTeamSize}}</td>\r\n\t\t  </tr>\r\n\t\t  <tr>\r\n\t\t\t<td>Prizes:</td>\r\n\t\t\t<td>{{event.prizes}}</td>\r\n\t\t  </tr>\r\n\t\t  <tr>\r\n\t\t\t<td>Hackathon Host:</td>\r\n\t\t\t<td>{{event.hackathonHost}}</td>\r\n\t\t  </tr>\r\n\t\t \r\n\t\t</table>\r\n\t\t<button (click)=\"goBack()\">Back</button>\r\n\t</div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -782,7 +786,7 @@ var EventComponent = /** @class */ (function () {
         this.route.params.forEach(function (params) {
             _this.id = +params['id'];
         });
-        this.event = this._eventService.getEvent(this.id).subscribe(function (event) { return _this.event = event; }, function (err) { return console.log(err); });
+        this._eventService.getEvent(this.id).subscribe(function (event) { return _this.event = event; }, function (err) { return console.log(err); });
     };
     EventComponent.prototype.goBack = function () {
         this.location.back();
@@ -856,7 +860,7 @@ module.exports = ".panel {\r\n    margin:15px;\r\n}"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class='panel panel-primary'>\r\n    \r\n    <div class='panel-heading'>\r\n        {{title}}\r\n    </div>\r\n    <div class='panel-body'>\r\n        <div class='row'>\r\n            <div class='col-md-1'>Filter by:</div>\r\n            <div class='col-md-3'>\r\n                <input type='text' [(ngModel)]='descriptionFilter' class=\"form-control\"/>\r\n            </div>\r\n            <!--<div class='col-md-1'>Show Fields:</div>\r\n            <div class='col-md-5'>\r\n                    <input type=\"checkbox\" (click)=\"onOff('desc')\" checked>Description\r\n                    <input type=\"checkbox\" (click)=\"onOff('seve')\" checked>Severity\r\n                    <input type=\"checkbox\" (click)=\"onOff('stat')\" checked>Status\r\n                    <input type=\"checkbox\" (click)=\"onOff('cdate')\" checked>Created Date\r\n                    <input type=\"checkbox\" (click)=\"onOff('rdate')\" checked>Resolved Date\r\n            </div>-->\r\n        </div>\r\n        <br>\r\n        <table class='table table-striped table-condensed' *ngIf='events && events.length'>\r\n            <thead>\r\n                <tr>\r\n                    <th style=\"min-width: 80px;\">Event#</th>\r\n\t\t\t\t\t<th style=\"min-width: 80px;\">Name</th>\r\n                    <th style=\"min-width: 80px;\">Description</th>                    \r\n                    <th style=\"min-width: 100px;\">Start Date</th>\r\n                    <th style=\"min-width: 60px;\">End Date</th>\r\n                    <th style=\"min-width: 80px;\">Status</th>\r\n\t\t\t\t\t<th style=\"min-width: 80px;\">Teams</th>\r\n                    <th style=\"min-width: 80px;\">Prizes</th>\r\n\t\t\t\t\t<th style=\"min-width: 80px;\">Host</th>\r\n                    <th style=\"width:20px;\"> </th>\r\n                    <th style=\"width:80px;\"> </th>\r\n                </tr>\r\n            </thead>\r\n            <tbody>\r\n                <tr *ngFor='let event of events | eventFilter: descriptionFilter'>\r\n                    <td >{{ event.id }}</td>\r\n\t\t\t\t\t<td ><a [routerLink]=\"event.id\">{{ event.name }}</a></td>\r\n                    <td >{{ event.description }}</td>\r\n\t\t\t\t\t<td >{{ event.startDate | date:\"dd-MMM-yy\" }}</td>\r\n                    <td >{{ event.endDate | date:\"dd-MMM-yy\" }}</td>\r\n\t\t\t\t\t<td >{{ event.status }}</td>\r\n                    <td >{{ event.noOfTeams }}</td>\r\n                    <td >{{ event.prizes }}</td>\r\n                    <td >{{ event.hackathonHost }}</td>\r\n                    <td><a [routerLink]=\"['/editEvent',event.id]\" class=\"btn btn-xs btn-primary\">Edit</a></td>\r\n                    <td><a (click)=\"deleteEvent(event.id)\" class=\"btn btn-xs btn-danger\">Delete</a><input style=\"margin-left: 5px;\" type=\"checkbox\" (click)=\"stateChanged($event,event.id)\"  ></td>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n        <a routerLink=\"/addEvent\" class=\"btn btn-xs btn-primary\">Add Event</a>\r\n        <a (click)=\"bulkDelete()\" class=\"btn btn-xs btn-danger pull-right\">Bulk Delete</a>\r\n    </div>\r\n</div>\r\n"
+module.exports = "<div class='panel panel-primary'>\r\n    \r\n    <div class='panel-heading'>\r\n        {{title}}\r\n    </div>\r\n    <div class='panel-body'>\r\n        <div class='row'>\r\n            <div class='col-md-1'>Filter by:</div>\r\n            <div class='col-md-3'>\r\n                <input type='text' [(ngModel)]='descriptionFilter' class=\"form-control\"/>\r\n            </div>\r\n            <!--<div class='col-md-1'>Show Fields:</div>\r\n            <div class='col-md-5'>\r\n                    <input type=\"checkbox\" (click)=\"onOff('desc')\" checked>Description\r\n                    <input type=\"checkbox\" (click)=\"onOff('seve')\" checked>Severity\r\n                    <input type=\"checkbox\" (click)=\"onOff('stat')\" checked>Status\r\n                    <input type=\"checkbox\" (click)=\"onOff('cdate')\" checked>Created Date\r\n                    <input type=\"checkbox\" (click)=\"onOff('rdate')\" checked>Resolved Date\r\n            </div>-->\r\n        </div>\r\n        <br>\r\n        <table class='table table-striped table-condensed' *ngIf='events && events.length'>\r\n            <thead>\r\n                <tr>\r\n                    <th style=\"min-width: 80px;\">Event#</th>\r\n\t\t\t\t\t<th style=\"min-width: 80px;\">Name</th>\r\n                    <th style=\"min-width: 80px;\">Description</th>                    \r\n                    <th style=\"min-width: 100px;\">Start Date</th>\r\n                    <th style=\"min-width: 60px;\">End Date</th>\r\n                    <th style=\"min-width: 80px;\">Status</th>\r\n\t\t\t\t\t<th style=\"min-width: 80px;\">Teams</th>\r\n                    <th style=\"min-width: 80px;\">Prizes</th>\r\n\t\t\t\t\t<th style=\"min-width: 80px;\">Host</th>\r\n                    <th style=\"width:20px;\"> </th>\r\n                    <th style=\"width:80px;\"> </th>\r\n                </tr>\r\n            </thead>\r\n            <tbody>\r\n                <tr *ngFor='let event of events | eventFilter: descriptionFilter'>\r\n                    <td >{{ event.eventId }}</td>\r\n\t\t\t\t\t<td ><a [routerLink]=\"event.eventId\">{{ event.name }}</a></td>\r\n                    <td >{{ event.description }}</td>\r\n\t\t\t\t\t<td >{{ event.startDate | date:\"dd-MMM-yy\" }}</td>\r\n                    <td >{{ event.endDate | date:\"dd-MMM-yy\" }}</td>\r\n\t\t\t\t\t<td >{{ event.status }}</td>\r\n                    <td >{{ event.noOfTeams }}</td>\r\n                    <td >{{ event.prizes }}</td>\r\n                    <td >{{ event.hackathonHost }}</td>\r\n                    <td><a [routerLink]=\"['/editEvent',event.eventId]\" class=\"btn btn-xs btn-primary\">Edit</a></td>\r\n                    <td><a (click)=\"deleteEvent(event.eventId)\" class=\"btn btn-xs btn-danger\">Delete</a><input style=\"margin-left: 5px;\" type=\"checkbox\" (click)=\"stateChanged($event,event.id)\"  ></td>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n        <a routerLink=\"/addEvent\" class=\"btn btn-xs btn-primary\">Add Event</a>\r\n        <a (click)=\"bulkDelete()\" class=\"btn btn-xs btn-danger pull-right\">Bulk Delete</a>\r\n    </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -978,7 +982,8 @@ var EventsService = /** @class */ (function () {
         this.count = 100;
         this.httpOptions = {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                "Authorization": "Bearer " + localStorage.getItem("email")
             })
         };
         console.log("Initializing Events service ...");
@@ -995,7 +1000,7 @@ var EventsService = /** @class */ (function () {
     };
     EventsService.prototype.getEvent = function (id) {
         var getEventURL = this._eventsUrl + "/edit/" + id;
-        return this._http.get(getEventURL);
+        return this._http.get(getEventURL, this.httpOptions);
     };
     EventsService.prototype.addEvent = function (newEvent) {
         this.count++;
@@ -1003,13 +1008,13 @@ var EventsService = /** @class */ (function () {
         return this._http.post(addEventURL, newEvent, this.httpOptions);
     };
     EventsService.prototype.updateEvent = function (updatedEvent) {
-        var updateEventURL = this._eventsUrl + "/edit/" + updatedEvent.id;
+        var updateEventURL = this._eventsUrl + "/edit/" + updatedEvent.eventId;
         return this._http.post(updateEventURL, updatedEvent, this.httpOptions);
     };
     EventsService.prototype.deleteEvent = function (id) {
         var deleteEventURL = this._eventsUrl + "/delete/" + id;
         console.log(deleteEventURL);
-        return this._http.get(deleteEventURL);
+        return this._http.delete(deleteEventURL, this.httpOptions);
     };
     EventsService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
@@ -1247,7 +1252,7 @@ var LoginFormComponent = /** @class */ (function () {
             }
           ]);*/
             _this.router.navigate(['events']);
-            window.location.reload();
+            //window.location.reload();
         });
     };
     LoginFormComponent = __decorate([
@@ -1393,11 +1398,12 @@ var UserFilterPipe = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UsersService", function() { return UsersService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var rxjs_add_operator_do__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs/add/operator/do */ "./node_modules/rxjs-compat/_esm5/add/operator/do.js");
-/* harmony import */ var rxjs_add_operator_shareReplay__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/add/operator/shareReplay */ "./node_modules/rxjs-compat/_esm5/add/operator/shareReplay.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var rxjs_add_operator_do__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/add/operator/do */ "./node_modules/rxjs-compat/_esm5/add/operator/do.js");
+/* harmony import */ var rxjs_add_operator_shareReplay__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/add/operator/shareReplay */ "./node_modules/rxjs-compat/_esm5/add/operator/shareReplay.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_5__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1412,16 +1418,19 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var UsersService = /** @class */ (function () {
     function UsersService(_http) {
         this._http = _http;
-        this._usersUrl = "user";
+        this._usersUrl = "http://localhost:3000/user";
         this.httpOptions = {
-            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]({
+            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpHeaders"]({
                 'Content-Type': 'application/json'
             })
         };
         console.log("Initializing Users service ...");
+        this.currentUserSubject = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"](JSON.parse(localStorage.getItem('currentUser')));
+        this.currentUser = this.currentUserSubject.asObservable();
     }
     UsersService.prototype.loginUser = function (userInfo, isAdmin) {
         var _this = this;
@@ -1455,8 +1464,10 @@ var UsersService = /** @class */ (function () {
         return this._http.get(deleteUserURL);
     };
     UsersService.prototype.setSession = function (authResult) {
-        var expiresAt = moment__WEBPACK_IMPORTED_MODULE_4__().add(authResult.expiresIn, 'second');
+        var expiresAt = moment__WEBPACK_IMPORTED_MODULE_5__().add(authResult.expiresIn, 'second');
         //console.log(authResult.firstname);	
+        localStorage.setItem('currentUser', JSON.stringify(authResult));
+        //this.currentUserSubject.next(authResult);
         localStorage.setItem('firstname', authResult.firstname);
         localStorage.setItem('email', authResult.idToken);
         localStorage.setItem('id_token', authResult.idToken);
@@ -1476,7 +1487,7 @@ var UsersService = /** @class */ (function () {
         localStorage.removeItem("expires_at");
     };
     UsersService.prototype.isLoggedIn = function () {
-        return moment__WEBPACK_IMPORTED_MODULE_4__().isBefore(this.getExpiration());
+        return moment__WEBPACK_IMPORTED_MODULE_5__().isBefore(this.getExpiration());
     };
     UsersService.prototype.isLoggedOut = function () {
         return !this.isLoggedIn();
@@ -1484,11 +1495,11 @@ var UsersService = /** @class */ (function () {
     UsersService.prototype.getExpiration = function () {
         var expiration = localStorage.getItem("expires_at");
         var expiresAt = JSON.parse(expiration);
-        return moment__WEBPACK_IMPORTED_MODULE_4__(expiresAt);
+        return moment__WEBPACK_IMPORTED_MODULE_5__(expiresAt);
     };
     UsersService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
-        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"]])
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClient"]])
     ], UsersService);
     return UsersService;
 }());
