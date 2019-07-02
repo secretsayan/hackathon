@@ -145,7 +145,7 @@ module.exports = {
 
         }
     },
-    manageHackList: async function(userEmail, callback){
+    manageHackList: async function (userEmail, callback){
         let res = [];
         try{
             res['status'] = '200';
@@ -158,6 +158,20 @@ module.exports = {
             res['message'] = 'Failed '+e;
             console.log('error'+e);
 
+        }
+    },
+    getAllUsers: async function (callback){
+        let res = [];
+        try {
+            let response = await User.find();            
+            res['status'] = '200';
+            res['message'] = response;
+            callback(res);
+        }
+        catch (e) {
+            res['status'] = '400';
+            res['message'] = 'Invalid Input '+ e;
+            callback(res);
         }
     } 
 

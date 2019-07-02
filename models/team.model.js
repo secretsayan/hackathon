@@ -9,6 +9,6 @@ const TeamSchema = mongoose.Schema({
     noOfMembers: {type: Number},
 }); 
 
-EventSchema.plugin(AutoIncrement, {inc_field: 'id'});
+EventSchema.plugin(AutoIncrement, {inc_field: 'teamId'});
 
 module.exports = mongoose.model('Team',TeamSchema);

@@ -12,6 +12,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var hackathonRouter = require('./routes/hackathon');
 var events = require('./routes/events');
+var regRouter = require('./routes/registration');
 
 var app = express();
 var bodyParser = require('body-parser');
@@ -43,6 +44,7 @@ app.use('/', indexRouter);
 app.use('/user', usersRouter);
 app.use('/hack',hackathonRouter);
 app.use('/event',events);
+app.use('/reg',regRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

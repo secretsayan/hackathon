@@ -6,6 +6,12 @@ const _ = require("lodash");
 const jwt = require("../config/jwt-module");
 const nodemailer = require("nodemailer");
 
+/*Get All User*/
+router.get('/all', function(req, res, next){
+  HackApi.getAllUsers(function (results){
+    res.status(results['status']).json(results['message']);
+  });
+});
 /* Login */
 router.post('/login', function (req, res, next) {
   if(req.body.email === null){
@@ -27,7 +33,8 @@ router.post('/login', function (req, res, next) {
         idToken: token, 
         firstname: obj.firstname,
         email: obj.email,
-        expiresIn: 1200
+        expiresIn: 1200,
+        role: obj.role
       });
       
     }         
