@@ -1,5 +1,6 @@
 const Event = require('../models/events.model');
 const User = require('../models/user.model');
+const Reg = require('../models/registration.model');
 
 module.exports = {
     getAllEvents: async function (callback) {
@@ -173,6 +174,65 @@ module.exports = {
             res['message'] = 'Invalid Input '+ e;
             callback(res);
         }
-    } 
+    },
+    insertReg: async function (reg, callback) {
+        let res = [];
+        try {
+            let response = await Reg.create(reg);
+            console.log(response);
+            res['status'] = '200';
+            res['message'] = response;
+            callback(res);
+        }
+        catch (e) {
+            res['status'] = '400';
+            res['message'] = 'Invalid Input '+ e;
+            callback(res);
+        }
 
+    },
+    getAllReg: async function (callback) {
+        let res = [];
+        try {
+            let response = await Reg.find();            
+            res['status'] = '200';
+            res['message'] = response;
+            callback(res);
+        }
+        catch (e) {
+            res['status'] = '400';
+            res['message'] = 'Invalid Input '+ e;
+            callback(res);
+        }
+
+    },
+    getRegByEventId: async function (id, callback) {
+        let res = [];
+        try {
+            let response = await Reg.find({ eventId: id });
+            res['status'] = '200';
+            res['message'] = response;
+            callback(res);
+        }
+        catch (e) {
+            res['status'] = '400';
+            res['message'] = 'Invalid Input '+ e;
+            callback(res);
+        }
+
+    },
+    checkRegs: async function (email, callback){
+        let res = [];
+        try {
+            let response = await Reg.find({ teamMembers: email });
+            res['status'] = '200';
+            res['message'] = response;
+            callback(res);
+        }
+        catch (e){
+            res['status'] = '400';
+            res['message'] = 'Invalid Input '+ e;
+            callback(res);
+        }
+    }
 };

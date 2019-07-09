@@ -28,11 +28,12 @@ router.post('/login', function (req, res, next) {
       res.status(401).json('Invalid Credentials');
     }else{
       var token = jwt.sign({email: useremail, role: obj.role});
+      console.log(token);
       //res.status(200).json('Login Sucessful token='+token);
       res.status(200).json({
         idToken: token, 
         firstname: obj.firstname,
-        email: obj.email,
+        email: useremail,
         expiresIn: 1200,
         role: obj.role
       });
@@ -95,6 +96,13 @@ router.get('/mail',function(req, res, next){
   
 
 });
+// Check User Registrations
+router.get('/checkreg/:email',function(req, res, next){
+  HackApi.checkRegs(req.params.email, function (results){
+    console.log("In user service"+results);
+    res.status(results['status']).json(results['message']);
+  }); 
+});
 
 //Check to make sure header is not undefined, if so, return Forbidden (403)
 function checkToken (req, res, next)  {
@@ -120,15 +128,30 @@ function checkToken (req, res, next)  {
 // Check Admin
 function checkAdmin (req, res, next) {
 
+  console.log("In check admin");
+
   const header = req.headers.authorization;
   if(typeof header !== 'undefined') {
+
+    console.log("In check admin 1");
+    console.log(header);
+
     const bearer = header.split(' ');
     if (bearer.length == 2){
+
+      console.log("In check admin 2");
+
       var scheme = bearer[0];
       var credentials = bearer[1]; 
       if (/^Bearer$/i.test(scheme)) {
+
+        console.log("In check admin 3");
+        console.log(credentials+scheme);
+        try{
+
         var userData = jwt.verify(credentials);
         console.log(userData);
+        }catch(e){console.log(e);}
         if (userData.role.indexOf('admin') > -1){        
         next(); 
         return;
@@ -139,7 +162,7 @@ function checkAdmin (req, res, next) {
   console.log("Failed in CheckAdmin");
   res.sendStatus(403);
 }
-
+// Mail function
 async function sendEMail (userEmail, callback){
   try{
   let testAccount = await nodemailer.createTestAccount();
@@ -181,6 +204,8 @@ async function sendEMail (userEmail, callback){
 
 
 }
+
+
 
 module.exports = router;
 module.exports.checkToken = checkToken;
