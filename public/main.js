@@ -351,7 +351,7 @@ var AboutComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "a{\r\n    text-decoration: none;\r\n}\r\n\r\na.active{\r\n    color: blue;\r\n    font-weight: bold;\r\n}\r\n"
+module.exports = "a{\r\n  text-decoration: none;\r\n}\r\n\r\na.active{\r\n  color: blue;\r\n  font-weight: bold;\r\n}\r\n"
 
 /***/ }),
 
@@ -379,6 +379,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _users_users_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./users/users.service */ "./src/app/users/users.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ngx-toastr */ "./node_modules/ngx-toastr/fesm5/ngx-toastr.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -391,10 +392,12 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var AppComponent = /** @class */ (function () {
-    function AppComponent(_userService, router) {
+    function AppComponent(_userService, router, toastr) {
         this._userService = _userService;
         this.router = router;
+        this.toastr = toastr;
         this.title = 'Hackathon Event Management';
         this.isLoggedIn = false;
         this.firstName = "";
@@ -407,6 +410,7 @@ var AppComponent = /** @class */ (function () {
         this._userService.logout();
         this.isLoggedIn = false;
         this.router.navigate(['login']);
+        this.toastr.success("Logged Out Successfully!!");
     };
     AppComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -414,7 +418,7 @@ var AppComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./app.component.html */ "./src/app/app.component.html"),
             styles: [__webpack_require__(/*! ./app.component.css */ "./src/app/app.component.css")]
         }),
-        __metadata("design:paramtypes", [_users_users_service__WEBPACK_IMPORTED_MODULE_1__["UsersService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
+        __metadata("design:paramtypes", [_users_users_service__WEBPACK_IMPORTED_MODULE_1__["UsersService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], ngx_toastr__WEBPACK_IMPORTED_MODULE_3__["ToastrService"]])
     ], AppComponent);
     return AppComponent;
 }());
@@ -438,21 +442,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /* harmony import */ var _angular_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/http */ "./node_modules/@angular/http/fesm5/http.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
-/* harmony import */ var _app_routing__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./app.routing */ "./src/app/app.routing.ts");
-/* harmony import */ var _about_about_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./about/about.component */ "./src/app/about/about.component.ts");
-/* harmony import */ var _users_login_form_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./users/login-form.component */ "./src/app/users/login-form.component.ts");
-/* harmony import */ var _users_user_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./users/user.component */ "./src/app/users/user.component.ts");
-/* harmony import */ var _users_adduser_form_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./users/adduser-form.component */ "./src/app/users/adduser-form.component.ts");
-/* harmony import */ var _users_edituser_form_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./users/edituser-form.component */ "./src/app/users/edituser-form.component.ts");
-/* harmony import */ var _users_users_filter_pipe__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./users/users-filter.pipe */ "./src/app/users/users-filter.pipe.ts");
-/* harmony import */ var _users_users_service__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./users/users.service */ "./src/app/users/users.service.ts");
-/* harmony import */ var _events_events_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./events/events.component */ "./src/app/events/events.component.ts");
-/* harmony import */ var _events_event_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./events/event.component */ "./src/app/events/event.component.ts");
-/* harmony import */ var _events_addevent_form_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./events/addevent-form.component */ "./src/app/events/addevent-form.component.ts");
-/* harmony import */ var _events_editevent_form_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./events/editevent-form.component */ "./src/app/events/editevent-form.component.ts");
-/* harmony import */ var _events_events_filter_pipe__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./events/events-filter.pipe */ "./src/app/events/events-filter.pipe.ts");
-/* harmony import */ var _events_events_service__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./events/events.service */ "./src/app/events/events.service.ts");
+/* harmony import */ var _ng_select_ng_select__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ng-select/ng-select */ "./node_modules/@ng-select/ng-select/fesm5/ng-select.js");
+/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm5/animations.js");
+/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ngx-toastr */ "./node_modules/ngx-toastr/fesm5/ngx-toastr.js");
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
+/* harmony import */ var _app_routing__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./app.routing */ "./src/app/app.routing.ts");
+/* harmony import */ var _about_about_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./about/about.component */ "./src/app/about/about.component.ts");
+/* harmony import */ var _users_login_form_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./users/login-form.component */ "./src/app/users/login-form.component.ts");
+/* harmony import */ var _users_user_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./users/user.component */ "./src/app/users/user.component.ts");
+/* harmony import */ var _users_adduser_form_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./users/adduser-form.component */ "./src/app/users/adduser-form.component.ts");
+/* harmony import */ var _users_edituser_form_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./users/edituser-form.component */ "./src/app/users/edituser-form.component.ts");
+/* harmony import */ var _users_users_filter_pipe__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./users/users-filter.pipe */ "./src/app/users/users-filter.pipe.ts");
+/* harmony import */ var _users_users_service__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./users/users.service */ "./src/app/users/users.service.ts");
+/* harmony import */ var _events_events_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./events/events.component */ "./src/app/events/events.component.ts");
+/* harmony import */ var _events_event_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./events/event.component */ "./src/app/events/event.component.ts");
+/* harmony import */ var _events_addevent_form_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./events/addevent-form.component */ "./src/app/events/addevent-form.component.ts");
+/* harmony import */ var _events_editevent_form_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./events/editevent-form.component */ "./src/app/events/editevent-form.component.ts");
+/* harmony import */ var _events_events_filter_pipe__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./events/events-filter.pipe */ "./src/app/events/events-filter.pipe.ts");
+/* harmony import */ var _events_events_service__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./events/events.service */ "./src/app/events/events.service.ts");
+/* harmony import */ var _registration_registration_component__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./registration/registration.component */ "./src/app/registration/registration.component.ts");
+/* harmony import */ var _registration_registration_service__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./registration/registration.service */ "./src/app/registration/registration.service.ts");
+/* harmony import */ var _registration_view_registration_component__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./registration/view-registration.component */ "./src/app/registration/view-registration.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -467,7 +477,13 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
-//import { UsersComponent } from './users/users.component';
+
+
+
+// import { UsersComponent } from './users/users.component';
+
+
+
 
 
 
@@ -485,24 +501,25 @@ var AppModule = /** @class */ (function () {
     }
     AppModule = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"])({
-            imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"], _angular_http__WEBPACK_IMPORTED_MODULE_3__["HttpModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClientModule"], _app_routing__WEBPACK_IMPORTED_MODULE_6__["routing"]],
+            imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"], _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_6__["BrowserAnimationsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"], _ng_select_ng_select__WEBPACK_IMPORTED_MODULE_5__["NgSelectModule"], _angular_http__WEBPACK_IMPORTED_MODULE_3__["HttpModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClientModule"], _app_routing__WEBPACK_IMPORTED_MODULE_9__["routing"], ngx_toastr__WEBPACK_IMPORTED_MODULE_7__["ToastrModule"].forRoot()],
             declarations: [
-                _app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"],
-                _about_about_component__WEBPACK_IMPORTED_MODULE_7__["AboutComponent"],
-                //UsersComponent,
-                _users_login_form_component__WEBPACK_IMPORTED_MODULE_8__["LoginFormComponent"],
-                _users_user_component__WEBPACK_IMPORTED_MODULE_9__["UserComponent"],
-                _users_adduser_form_component__WEBPACK_IMPORTED_MODULE_10__["AddUserFormComponent"],
-                _users_edituser_form_component__WEBPACK_IMPORTED_MODULE_11__["EditUserFormComponent"],
-                _users_users_filter_pipe__WEBPACK_IMPORTED_MODULE_12__["UserFilterPipe"],
-                _events_events_component__WEBPACK_IMPORTED_MODULE_14__["EventsComponent"],
-                _events_event_component__WEBPACK_IMPORTED_MODULE_15__["EventComponent"],
-                _events_addevent_form_component__WEBPACK_IMPORTED_MODULE_16__["AddEventFormComponent"],
-                _events_editevent_form_component__WEBPACK_IMPORTED_MODULE_17__["EditEventFormComponent"],
-                _events_events_filter_pipe__WEBPACK_IMPORTED_MODULE_18__["EventFilterPipe"]
+                _app_component__WEBPACK_IMPORTED_MODULE_8__["AppComponent"],
+                _about_about_component__WEBPACK_IMPORTED_MODULE_10__["AboutComponent"],
+                _users_login_form_component__WEBPACK_IMPORTED_MODULE_11__["LoginFormComponent"],
+                _users_user_component__WEBPACK_IMPORTED_MODULE_12__["UserComponent"],
+                _users_adduser_form_component__WEBPACK_IMPORTED_MODULE_13__["AddUserFormComponent"],
+                _users_edituser_form_component__WEBPACK_IMPORTED_MODULE_14__["EditUserFormComponent"],
+                _users_users_filter_pipe__WEBPACK_IMPORTED_MODULE_15__["UserFilterPipe"],
+                _events_events_component__WEBPACK_IMPORTED_MODULE_17__["EventsComponent"],
+                _events_event_component__WEBPACK_IMPORTED_MODULE_18__["EventComponent"],
+                _events_addevent_form_component__WEBPACK_IMPORTED_MODULE_19__["AddEventFormComponent"],
+                _events_editevent_form_component__WEBPACK_IMPORTED_MODULE_20__["EditEventFormComponent"],
+                _registration_registration_component__WEBPACK_IMPORTED_MODULE_23__["RegistrationComponent"],
+                _registration_view_registration_component__WEBPACK_IMPORTED_MODULE_25__["ViewRegistrationComponent"],
+                _events_events_filter_pipe__WEBPACK_IMPORTED_MODULE_21__["EventFilterPipe"]
             ],
-            providers: [_users_users_service__WEBPACK_IMPORTED_MODULE_13__["UsersService"], _events_events_service__WEBPACK_IMPORTED_MODULE_19__["EventsService"]],
-            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"]]
+            providers: [_users_users_service__WEBPACK_IMPORTED_MODULE_16__["UsersService"], _events_events_service__WEBPACK_IMPORTED_MODULE_22__["EventsService"], _registration_registration_service__WEBPACK_IMPORTED_MODULE_24__["RegistrationService"]],
+            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_8__["AppComponent"]]
         })
     ], AppModule);
     return AppModule;
@@ -531,6 +548,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _events_event_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./events/event.component */ "./src/app/events/event.component.ts");
 /* harmony import */ var _events_addevent_form_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./events/addevent-form.component */ "./src/app/events/addevent-form.component.ts");
 /* harmony import */ var _events_editevent_form_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./events/editevent-form.component */ "./src/app/events/editevent-form.component.ts");
+/* harmony import */ var _registration_registration_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./registration/registration.component */ "./src/app/registration/registration.component.ts");
+/* harmony import */ var _registration_view_registration_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./registration/view-registration.component */ "./src/app/registration/view-registration.component.ts");
+
+
 
 
 
@@ -544,12 +565,13 @@ var appRoutes = [
     { path: '', component: _about_about_component__WEBPACK_IMPORTED_MODULE_1__["AboutComponent"] },
     { path: 'login', component: _users_login_form_component__WEBPACK_IMPORTED_MODULE_2__["LoginFormComponent"] },
     { path: 'signup', component: _users_adduser_form_component__WEBPACK_IMPORTED_MODULE_3__["AddUserFormComponent"] },
-    //{ path: 'users', component: UsersComponent },
     { path: 'profile', component: _users_edituser_form_component__WEBPACK_IMPORTED_MODULE_4__["EditUserFormComponent"] },
     { path: 'events', component: _events_events_component__WEBPACK_IMPORTED_MODULE_5__["EventsComponent"] },
     { path: 'events/:id', component: _events_event_component__WEBPACK_IMPORTED_MODULE_6__["EventComponent"] },
     { path: 'addEvent', component: _events_addevent_form_component__WEBPACK_IMPORTED_MODULE_7__["AddEventFormComponent"] },
-    { path: 'editEvent/:id', component: _events_editevent_form_component__WEBPACK_IMPORTED_MODULE_8__["EditEventFormComponent"] }
+    { path: 'editEvent/:id', component: _events_editevent_form_component__WEBPACK_IMPORTED_MODULE_8__["EditEventFormComponent"] },
+    { path: 'registration/:id', component: _registration_registration_component__WEBPACK_IMPORTED_MODULE_9__["RegistrationComponent"] },
+    { path: 'registration/view/:id', component: _registration_view_registration_component__WEBPACK_IMPORTED_MODULE_10__["ViewRegistrationComponent"] },
 ];
 var routing = _angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"].forRoot(appRoutes);
 
@@ -604,7 +626,7 @@ var AddEventFormComponent = /** @class */ (function () {
         console.log("Form Value = " + JSON.stringify(formValue, null, 4));
         var eventCount = this._eventService.getEventCount();
         var newEvent = {
-            //id: issueCount + 1,
+            // id: issueCount + 1,
             name: formValue.name,
             description: formValue.description,
             startDate: formValue.startDate,
@@ -829,7 +851,7 @@ var EventFilterPipe = /** @class */ (function () {
     EventFilterPipe.prototype.transform = function (value, args) {
         var filter = args ? args.toLocaleLowerCase() : null;
         return filter ? value.filter(function (event) {
-            return event.description.toLocaleLowerCase().startsWith(filter) != false;
+            return event.name.toLocaleLowerCase().includes(filter) != false;
         }) : value;
     };
     EventFilterPipe = __decorate([
@@ -849,7 +871,7 @@ var EventFilterPipe = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".panel {\r\n    margin:15px;\r\n}"
+module.exports = ".panel {\r\n  margin:15px;\r\n}"
 
 /***/ }),
 
@@ -860,7 +882,7 @@ module.exports = ".panel {\r\n    margin:15px;\r\n}"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class='panel panel-primary'>\r\n    \r\n    <div class='panel-heading'>\r\n        {{title}}\r\n    </div>\r\n    <div class='panel-body'>\r\n        <div class='row'>\r\n            <div class='col-md-1'>Filter by:</div>\r\n            <div class='col-md-3'>\r\n                <input type='text' [(ngModel)]='descriptionFilter' class=\"form-control\"/>\r\n            </div>\r\n            <!--<div class='col-md-1'>Show Fields:</div>\r\n            <div class='col-md-5'>\r\n                    <input type=\"checkbox\" (click)=\"onOff('desc')\" checked>Description\r\n                    <input type=\"checkbox\" (click)=\"onOff('seve')\" checked>Severity\r\n                    <input type=\"checkbox\" (click)=\"onOff('stat')\" checked>Status\r\n                    <input type=\"checkbox\" (click)=\"onOff('cdate')\" checked>Created Date\r\n                    <input type=\"checkbox\" (click)=\"onOff('rdate')\" checked>Resolved Date\r\n            </div>-->\r\n        </div>\r\n        <br>\r\n        <table class='table table-striped table-condensed' *ngIf='events && events.length'>\r\n            <thead>\r\n                <tr>\r\n                    <th style=\"min-width: 80px;\">Event#</th>\r\n\t\t\t\t\t<th style=\"min-width: 80px;\">Name</th>\r\n                    <th style=\"min-width: 80px;\">Description</th>                    \r\n                    <th style=\"min-width: 100px;\">Start Date</th>\r\n                    <th style=\"min-width: 60px;\">End Date</th>\r\n                    <th style=\"min-width: 80px;\">Status</th>\r\n\t\t\t\t\t<th style=\"min-width: 80px;\">Teams</th>\r\n                    <th style=\"min-width: 80px;\">Prizes</th>\r\n\t\t\t\t\t<th style=\"min-width: 80px;\">Host</th>\r\n                    <th style=\"width:20px;\"> </th>\r\n                    <th style=\"width:80px;\"> </th>\r\n                </tr>\r\n            </thead>\r\n            <tbody>\r\n                <tr *ngFor='let event of events | eventFilter: descriptionFilter'>\r\n                    <td >{{ event.eventId }}</td>\r\n\t\t\t\t\t<td ><a [routerLink]=\"event.eventId\">{{ event.name }}</a></td>\r\n                    <td >{{ event.description }}</td>\r\n\t\t\t\t\t<td >{{ event.startDate | date:\"dd-MMM-yy\" }}</td>\r\n                    <td >{{ event.endDate | date:\"dd-MMM-yy\" }}</td>\r\n\t\t\t\t\t<td >{{ event.status }}</td>\r\n                    <td >{{ event.noOfTeams }}</td>\r\n                    <td >{{ event.prizes }}</td>\r\n                    <td >{{ event.hackathonHost }}</td>\r\n                    <td><a [routerLink]=\"['/editEvent',event.eventId]\" class=\"btn btn-xs btn-primary\">Edit</a></td>\r\n                    <td><a (click)=\"deleteEvent(event.eventId)\" class=\"btn btn-xs btn-danger\">Delete</a><input style=\"margin-left: 5px;\" type=\"checkbox\" (click)=\"stateChanged($event,event.id)\"  ></td>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n        <a routerLink=\"/addEvent\" class=\"btn btn-xs btn-primary\">Add Event</a>\r\n        <a (click)=\"bulkDelete()\" class=\"btn btn-xs btn-danger pull-right\">Bulk Delete</a>\r\n    </div>\r\n</div>\r\n"
+module.exports = "<div class='panel panel-primary'>\r\n\r\n    <div class='panel-heading'>\r\n        {{title}}\r\n    </div>\r\n    <div class='panel-body'>\r\n        <div class='row'>\r\n            <div class='col-md-1'>Event Filter:</div>\r\n            <div class='col-md-3'>\r\n                <input type='text' [(ngModel)]='descriptionFilter' class=\"form-control\" />\r\n            </div>\r\n            <!--<div class='col-md-1'>Show Fields:</div>\r\n            <div class='col-md-5'>\r\n                    <input type=\"checkbox\" (click)=\"onOff('desc')\" checked>Description\r\n                    <input type=\"checkbox\" (click)=\"onOff('seve')\" checked>Severity\r\n                    <input type=\"checkbox\" (click)=\"onOff('stat')\" checked>Status\r\n                    <input type=\"checkbox\" (click)=\"onOff('cdate')\" checked>Created Date\r\n                    <input type=\"checkbox\" (click)=\"onOff('rdate')\" checked>Resolved Date\r\n            </div>-->\r\n        </div>\r\n        <br>\r\n        <table class='table table-striped table-condensed' *ngIf='events && events.length'>\r\n            <thead>\r\n                <tr>\r\n                    <th style=\"min-width: 80px;\">Event#</th>\r\n                    <th style=\"min-width: 80px;\">Name</th>\r\n                    <th style=\"min-width: 80px;\">Description</th>\r\n                    <th style=\"min-width: 100px;\">Start Date</th>\r\n                    <th style=\"min-width: 60px;\">End Date</th>\r\n                    <th style=\"min-width: 80px;\">Status</th>\r\n                    <th style=\"min-width: 80px;\">Teams</th>\r\n                    <th style=\"min-width: 80px;\">Prizes</th>\r\n                    <th style=\"min-width: 80px;\">Host</th>\r\n                    <th style=\"width:20px;\"> </th>\r\n                    <th style=\"width:80px;\"> </th>\r\n                </tr>\r\n            </thead>\r\n            <tbody>\r\n                <tr *ngFor='let event of events | eventFilter: descriptionFilter'>\r\n                    <td>{{ event.eventId }}</td>\r\n                    <td>{{ event.name }}</td>\r\n                    <td>{{ event.description }}</td>\r\n                    <td>{{ event.startDate | date:\"dd-MMM-yy\" }}</td>\r\n                    <td>{{ event.endDate | date:\"dd-MMM-yy\" }}</td>\r\n                    <td>{{ event.status }}</td>\r\n                    <td>{{ event.noOfTeams }}</td>\r\n                    <td>{{ event.prizes }}</td>\r\n                    <td>{{ event.hackathonHost }}</td>\r\n                    <td *ngIf=\"userRole != 'admin' && userReg.indexOf(event.eventId) == -1\"><a\r\n                            [routerLink]=\"['/registration',event.eventId]\" class=\"btn btn-xs btn-primary\">Register</a>\r\n                    </td>\r\n                    <td *ngIf=\"userReg.indexOf(event.eventId) > -1\" class=\"btn btn-success\">Registered</td>\r\n                    <td *ngIf=\"userRole == 'admin'\"><a [routerLink]=\"['/editEvent',event.eventId]\"\r\n                            class=\"btn btn-xs btn-primary\">Edit</a></td>\r\n                    <td *ngIf=\"userRole == 'admin'\"><a (click)=\"deleteEvent(event.eventId)\"\r\n                            class=\"btn btn-xs btn-danger\">Delete</a>\r\n                        <input *ngIf=\"userRole == 'admin' \" style=\"margin-left: 5px;\" type=\"checkbox\"\r\n                            (click)=\"stateChanged($event,event.eventId)\">\r\n                    </td>\r\n                    <td *ngIf=\"userRole == 'admin'\"><a [routerLink]=\"['/registration/view',event.eventId]\"\r\n                            class=\"btn btn-xs btn-primary\">View Registrations</a></td>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n        <a *ngIf=\"userRole == 'admin'\" routerLink=\"/addEvent\" class=\"btn btn-xs btn-primary\">Add Event</a>\r\n        <a *ngIf=\"userRole == 'admin'\" (click)=\"bulkDelete()\" class=\"btn btn-xs btn-danger pull-right\">Bulk Delete</a>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
@@ -900,17 +922,29 @@ var EventsComponent = /** @class */ (function () {
         this.selectedEvents = [];
     }
     EventsComponent.prototype.ngOnInit = function () {
+        var _this = this;
         if (this._userService.isLoggedIn()) {
+            // Get role of the logged in user
+            this.userRole = this._userService.getRole();
+            // Get registrations of the logged in user
+            this._userService.getRegistrations().subscribe(function (registration) {
+                _this.userReg = registration.map(function (reg) {
+                    return parseInt(reg.eventId);
+                });
+            });
+            // Get events
             this.getEvents();
         }
         else {
+            // Redirect to Login page
             this.router.navigate(['login']);
         }
-        //this._userService.isLoggedIn().subscribe(val => {if(val) this.getEvents(); else this.router.navigate(['login']);});
     };
     EventsComponent.prototype.getEvents = function () {
         var _this = this;
-        this._eventService.getEvents().subscribe(function (events) { return _this.events = events; }, function (err) { return console.log(err); });
+        this._eventService.getEvents().subscribe(function (events) {
+            _this.events = events;
+        }, function (err) { return console.log(err); });
     };
     EventsComponent.prototype.deleteEvent = function (id) {
         var _this = this;
@@ -978,12 +1012,12 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var EventsService = /** @class */ (function () {
     function EventsService(_http) {
         this._http = _http;
-        this._eventsUrl = "event";
+        this._eventsUrl = "http://localhost:3000/event";
         this.count = 100;
         this.httpOptions = {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
                 'Content-Type': 'application/json',
-                "Authorization": "Bearer " + localStorage.getItem("email")
+                "Authorization": "Bearer " + localStorage.getItem("id_token")
             })
         };
         console.log("Initializing Events service ...");
@@ -1027,6 +1061,267 @@ var EventsService = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/registration/registration.component.css":
+/*!*********************************************************!*\
+  !*** ./src/app/registration/registration.component.css ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/registration/registration.component.html":
+/*!**********************************************************!*\
+  !*** ./src/app/registration/registration.component.html ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class='panel panel-primary'>\r\n  <div class='panel-heading'>\r\n    {{title}}\r\n  </div>\r\n  <div class='panel-body'>\r\n    <form #formRef=\"ngForm\" (ngSubmit)=\"onSubmit(formRef.value)\">\r\n      <div class=\"form-group\">\r\n        <label for=\"name\">Team Name</label>\r\n        <input type=\"text\" class=\"form-control\" id=\"name\" name=\"name\" [(ngModel)]=\"name\" required minlength=\"3\" #nameRef=\"ngModel\">\r\n        <div *ngIf=\"nameRef.invalid && (nameRef.dirty || nameRef.touched)\" class=\"alert alert-danger\">\r\n          <div *ngIf=\"nameRef.errors.required\">\r\n            Name of the event is required.\r\n          </div>\r\n          <div *ngIf=\"nameRef.errors.minlength\">\r\n            Name must be at least 3 characters long.\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <label for=\"description\">Description</label>\r\n        <input type=\"text\" class=\"form-control\" id=\"description\" name=\"description\" [(ngModel)]=\"description\" required minlength=\"10\"\r\n          #descRef=\"ngModel\">\r\n        <div *ngIf=\"descRef.invalid && (descRef.dirty || descRef.touched)\" class=\"alert alert-danger\">\r\n          <div *ngIf=\"descRef.errors.required\">\r\n            Description is required.\r\n          </div>\r\n          <div *ngIf=\"descRef.errors.minlength\">\r\n            Description must be at least 10 characters long.\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <label for=\"members\">Members</label>\r\n        <ng-select [items]=\"members\" [multiple]=\"true\" bindLabel=\"fullname\" bindValue=\"email\" name=\"members\" [(ngModel)]=\"selectedMembers\"\r\n          #memRef=\"ngModel\" required>\r\n\r\n        </ng-select>\r\n      </div>\r\n     \r\n      <button type=\"submit\" class=\"btn btn-info\" [disabled]=\"formRef.invalid\">Submit</button>\r\n\r\n    </form>\r\n  </div>\r\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/registration/registration.component.ts":
+/*!********************************************************!*\
+  !*** ./src/app/registration/registration.component.ts ***!
+  \********************************************************/
+/*! exports provided: RegistrationComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RegistrationComponent", function() { return RegistrationComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _users_users_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../users/users.service */ "./src/app/users/users.service.ts");
+/* harmony import */ var _registration_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./registration.service */ "./src/app/registration/registration.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ngx-toastr */ "./node_modules/ngx-toastr/fesm5/ngx-toastr.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var RegistrationComponent = /** @class */ (function () {
+    function RegistrationComponent(toastr, _userService, _registrationService, route, router) {
+        this.toastr = toastr;
+        this._userService = _userService;
+        this._registrationService = _registrationService;
+        this.route = route;
+        this.router = router;
+        this.title = "Registration for Hackathon";
+        this.statuses = ["Open", "In Progress", "Closed"];
+    }
+    RegistrationComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this._userService.getAllUsers().subscribe(function (user) {
+            var newUser = user.filter(function (item) {
+                var userEmail = _this._userService.getEmail();
+                return item.email != "admin@hack.com" && item.email != userEmail;
+            });
+            _this.members = newUser.map(function (item) {
+                return item.fullname = item.firstname + " " + item.lastname;
+            });
+        });
+    };
+    RegistrationComponent.prototype.onSubmit = function (formValue) {
+        var _this = this;
+        console.log("Form Value = " + JSON.stringify(formValue, null, 4));
+        formValue.members.push(localStorage.getItem("email"));
+        var newReg = {
+            eventId: this.route.snapshot.params.id,
+            teamName: formValue.name,
+            teamDescription: formValue.description,
+            teamMembers: formValue.members,
+        };
+        this._registrationService.addReg(newReg).subscribe(function (val) {
+            _this.router.navigate(['events']);
+            _this.toastr.success("You have successfully Registered for the event");
+        });
+    };
+    RegistrationComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-registration',
+            template: __webpack_require__(/*! ./registration.component.html */ "./src/app/registration/registration.component.html"),
+            styles: [__webpack_require__(/*! ./registration.component.css */ "./src/app/registration/registration.component.css")]
+        }),
+        __metadata("design:paramtypes", [ngx_toastr__WEBPACK_IMPORTED_MODULE_4__["ToastrService"], _users_users_service__WEBPACK_IMPORTED_MODULE_1__["UsersService"], _registration_service__WEBPACK_IMPORTED_MODULE_2__["RegistrationService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
+    ], RegistrationComponent);
+    return RegistrationComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/registration/registration.service.ts":
+/*!******************************************************!*\
+  !*** ./src/app/registration/registration.service.ts ***!
+  \******************************************************/
+/*! exports provided: RegistrationService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RegistrationService", function() { return RegistrationService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var RegistrationService = /** @class */ (function () {
+    function RegistrationService(_http) {
+        this._http = _http;
+        this._regUrl = "http://localhost:3000/reg";
+        this.count = 100;
+        this.httpOptions = {
+            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
+                'Content-Type': 'application/json',
+                "Authorization": "Bearer " + localStorage.getItem("email")
+            })
+        };
+        console.log("Initializing Events service ...");
+    }
+    RegistrationService.prototype.getRegCount = function () {
+        var regs = this._http.get(this._regUrl + "/all").subscribe(function (reg) { return regs = reg; }, function (err) { return console.log(err); });
+        if (regs)
+            return regs.length;
+        else
+            return 0;
+    };
+    RegistrationService.prototype.getAllReg = function () {
+        return this._http.get(this._regUrl + "/all");
+    };
+    RegistrationService.prototype.getReg = function (id) {
+        var getEventURL = this._regUrl + "/view/" + id;
+        return this._http.get(getEventURL, this.httpOptions);
+    };
+    RegistrationService.prototype.addReg = function (newReg) {
+        var addRegURL = this._regUrl + "/add";
+        return this._http.post(addRegURL, newReg, this.httpOptions);
+    };
+    RegistrationService.prototype.updateReg = function (updatedEvent) {
+        var updateEventURL = this._regUrl + "/edit/" + updatedEvent.eventId;
+        return this._http.post(updateEventURL, updatedEvent, this.httpOptions);
+    };
+    RegistrationService.prototype.deleteReg = function (id) {
+        var deleteEventURL = this._regUrl + "/delete/" + id;
+        console.log(deleteEventURL);
+        return this._http.delete(deleteEventURL, this.httpOptions);
+    };
+    RegistrationService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
+    ], RegistrationService);
+    return RegistrationService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/registration/view-registration.component.css":
+/*!**************************************************************!*\
+  !*** ./src/app/registration/view-registration.component.css ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/registration/view-registration.component.html":
+/*!***************************************************************!*\
+  !*** ./src/app/registration/view-registration.component.html ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class='panel panel-primary'>\r\n    \r\n    <div class='panel-heading'>\r\n        {{title}}\r\n    </div>\r\n    <div class='panel-body'>\r\n        <br>\r\n        <table class='table table-striped table-condensed' *ngIf='regs && regs.length'>\r\n            <thead>\r\n                <tr>\r\n                    <th style=\"min-width: 80px;\">Registration#</th>\r\n                    <th style=\"min-width: 80px;\">Team Name</th>\r\n                    <th style=\"min-width: 80px;\">Team Description</th>                    \r\n                    <th style=\"min-width: 80px;\">Team Members</th>\r\n                    <th style=\"width:20px;\"> </th>\r\n                    <th style=\"width:80px;\"> </th>\r\n                </tr>\r\n            </thead>\r\n            <tbody>\r\n                <tr *ngFor='let reg of regs'>\r\n                    <td >{{ reg.regId }}</td>\r\n                    <td ><a [routerLink]=\"reg.regId\">{{ reg.teamName }}</a></td>\r\n                    <td >{{ reg.teamDescription }}</td>\r\n                    <td >{{ reg.teamMembers }}</td>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n    </div>\r\n</div>\r\n\r\n\r\n\r\n\r\n"
+
+/***/ }),
+
+/***/ "./src/app/registration/view-registration.component.ts":
+/*!*************************************************************!*\
+  !*** ./src/app/registration/view-registration.component.ts ***!
+  \*************************************************************/
+/*! exports provided: ViewRegistrationComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ViewRegistrationComponent", function() { return ViewRegistrationComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _users_users_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../users/users.service */ "./src/app/users/users.service.ts");
+/* harmony import */ var _registration_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./registration.service */ "./src/app/registration/registration.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var ViewRegistrationComponent = /** @class */ (function () {
+    function ViewRegistrationComponent(_regService, _userService, router, route) {
+        this._regService = _regService;
+        this._userService = _userService;
+        this.router = router;
+        this.route = route;
+        this.title = "View Registrations";
+    }
+    ViewRegistrationComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        if (this._userService.isLoggedIn()) {
+            if (this._userService.getRole() == 'admin')
+                this._regService.getReg(this.route.snapshot.params.id).subscribe(function (registrations) {
+                    _this.regs = registrations;
+                });
+        }
+        else {
+            this.router.navigate(['login']);
+        }
+    };
+    ViewRegistrationComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-regs',
+            template: __webpack_require__(/*! ./view-registration.component.html */ "./src/app/registration/view-registration.component.html"),
+            styles: [__webpack_require__(/*! ./view-registration.component.css */ "./src/app/registration/view-registration.component.css")]
+        }),
+        __metadata("design:paramtypes", [_registration_service__WEBPACK_IMPORTED_MODULE_2__["RegistrationService"], _users_users_service__WEBPACK_IMPORTED_MODULE_1__["UsersService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"]])
+    ], ViewRegistrationComponent);
+    return ViewRegistrationComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/users/adduser-form.component.html":
 /*!***************************************************!*\
   !*** ./src/app/users/adduser-form.component.html ***!
@@ -1051,6 +1346,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _users_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./users.service */ "./src/app/users/users.service.ts");
+/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ngx-toastr */ "./node_modules/ngx-toastr/fesm5/ngx-toastr.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1063,17 +1359,18 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var AddUserFormComponent = /** @class */ (function () {
-    function AddUserFormComponent(_userService, router) {
+    function AddUserFormComponent(_userService, router, toastr) {
         this._userService = _userService;
         this.router = router;
-        this.title = "Adding an User";
+        this.toastr = toastr;
+        this.title = "User Registration";
     }
     AddUserFormComponent.prototype.onSubmit = function (formValue) {
         var _this = this;
         console.log("Form Value = " + JSON.stringify(formValue, null, 4));
         var newUser = {
-            //id: issueCount + 1,
             firstname: formValue.firstName,
             lastname: formValue.lastName,
             email: formValue.email,
@@ -1084,6 +1381,7 @@ var AddUserFormComponent = /** @class */ (function () {
         };
         this._userService.addUser(newUser).subscribe(function (val) {
             _this.router.navigate(['login']);
+            _this.toastr.success("You have successfully registered! Please login now");
         });
     };
     AddUserFormComponent = __decorate([
@@ -1092,7 +1390,7 @@ var AddUserFormComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./adduser-form.component.html */ "./src/app/users/adduser-form.component.html"),
             styles: ['.panel {margin:15px;}']
         }),
-        __metadata("design:paramtypes", [_users_service__WEBPACK_IMPORTED_MODULE_2__["UsersService"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]])
+        __metadata("design:paramtypes", [_users_service__WEBPACK_IMPORTED_MODULE_2__["UsersService"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"], ngx_toastr__WEBPACK_IMPORTED_MODULE_3__["ToastrService"]])
     ], AddUserFormComponent);
     return AddUserFormComponent;
 }());
@@ -1208,6 +1506,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _users_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./users.service */ "./src/app/users/users.service.ts");
+/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ngx-toastr */ "./node_modules/ngx-toastr/fesm5/ngx-toastr.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1220,10 +1519,12 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var LoginFormComponent = /** @class */ (function () {
-    function LoginFormComponent(_userService, router) {
+    function LoginFormComponent(_userService, router, toastr) {
         this._userService = _userService;
         this.router = router;
+        this.toastr = toastr;
         this.title = "User Login";
         this.isAdmin = false;
     }
@@ -1239,21 +1540,24 @@ var LoginFormComponent = /** @class */ (function () {
         var _this = this;
         console.log("Form Value = " + JSON.stringify(formValue, null, 4));
         var userInfo = {
-            //id: issueCount + 1,
+            // id: issueCount + 1,
             email: formValue.email,
             password: formValue.password
         };
         this._userService.loginUser(userInfo, this.isAdmin).subscribe(function (val) {
-            /*let val[] = val.split("token=");
-            localStorage.setItem('loggedUser',JSON.stringify([
-            {
-              "email": formValue.email,
-              "password": val[1]
-            }
-          ]);*/
             _this.router.navigate(['events']);
-            //window.location.reload();
+            _this.showToaster("loggedin");
+        }, function (err) {
+            _this.showToaster("log in Failed");
         });
+    };
+    LoginFormComponent.prototype.showToaster = function (loggedin) {
+        if (loggedin == "loggedin") {
+            this.toastr.success("Successfully Logged In");
+        }
+        else {
+            this.toastr.error("Invalid Credentials");
+        }
     };
     LoginFormComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -1261,7 +1565,7 @@ var LoginFormComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./login-form.component.html */ "./src/app/users/login-form.component.html"),
             styles: ['.panel {margin:15px;}']
         }),
-        __metadata("design:paramtypes", [_users_service__WEBPACK_IMPORTED_MODULE_2__["UsersService"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]])
+        __metadata("design:paramtypes", [_users_service__WEBPACK_IMPORTED_MODULE_2__["UsersService"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"], ngx_toastr__WEBPACK_IMPORTED_MODULE_3__["ToastrService"]])
     ], LoginFormComponent);
     return LoginFormComponent;
 }());
@@ -1319,7 +1623,6 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
-//import "rxjs/add/operator/map";
 var UserComponent = /** @class */ (function () {
     function UserComponent(_userService, route, location) {
         this._userService = _userService;
@@ -1422,7 +1725,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var UsersService = /** @class */ (function () {
     function UsersService(_http) {
         this._http = _http;
-        this._usersUrl = "user";
+        this._usersUrl = "http://localhost:3000/user";
         this.httpOptions = {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpHeaders"]({
                 'Content-Type': 'application/json'
@@ -1450,6 +1753,10 @@ var UsersService = /** @class */ (function () {
         var getUserURL = this._usersUrl + "/edit/" + id;
         return this._http.get(getUserURL);
     };
+    UsersService.prototype.getAllUsers = function () {
+        var getUsersURL = this._usersUrl + "/all";
+        return this._http.get(getUsersURL);
+    };
     UsersService.prototype.addUser = function (newUser) {
         var addUserURL = this._usersUrl + "/signup";
         return this._http.post(addUserURL, newUser, this.httpOptions);
@@ -1465,20 +1772,28 @@ var UsersService = /** @class */ (function () {
     };
     UsersService.prototype.setSession = function (authResult) {
         var expiresAt = moment__WEBPACK_IMPORTED_MODULE_5__().add(authResult.expiresIn, 'second');
-        //console.log(authResult.firstname);	
+        console.log(JSON.stringify(authResult));
         localStorage.setItem('currentUser', JSON.stringify(authResult));
-        //this.currentUserSubject.next(authResult);
         localStorage.setItem('firstname', authResult.firstname);
-        localStorage.setItem('email', authResult.idToken);
+        localStorage.setItem('email', authResult.email);
         localStorage.setItem('id_token', authResult.idToken);
+        localStorage.setItem('role', authResult.role);
         localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()));
     };
     UsersService.prototype.getFirstName = function () {
-        console.log(localStorage.getItem("firstname"));
         return localStorage.getItem("firstname");
     };
     UsersService.prototype.getEmail = function () {
         return localStorage.getItem("email");
+    };
+    UsersService.prototype.getRole = function () {
+        return localStorage.getItem("role");
+    };
+    UsersService.prototype.getRegistrations = function () {
+        var email = localStorage.getItem("email");
+        console.log("email" + email);
+        var getUsersURL = this._usersUrl + "/checkreg/" + email;
+        return this._http.get(getUsersURL);
     };
     UsersService.prototype.logout = function () {
         localStorage.removeItem("id_token");
