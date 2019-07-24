@@ -8,4 +8,9 @@ describe('testing events all', () => {
         expect(response.statusCode).toBe(200);
                       
     });
+
+    test('time check', async ()=>{
+        const response = await request(app).get('/event/all');
+        expect(response).toBeDefined();
+    });
 });
