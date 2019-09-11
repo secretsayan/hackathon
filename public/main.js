@@ -311,6 +311,28 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 
 /***/ }),
 
+/***/ "./src/app/about/about.component.css":
+/*!*******************************************!*\
+  !*** ./src/app/about/about.component.css ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".events{\r\n    overflow: hidden;\r\n    height: 200px;\r\n    display: block;\r\n    font-size: 1.5em;\r\n    float:left;\r\n}\r\n\r\n.closed-events{\r\n    font-size: 1.2em;\r\n}\r\n\r\n.event .panel-body{\r\n    font-size: 1em;\r\n}\r\n\r\n.events .panel{\r\n    height:90%;\r\n\r\n}\r\n\r\n.eventsss button{\r\n    background-color: #550C18;\r\n}\r\n\r\na.register{\r\n    float:right;\r\n    font-size: 0.8em;\r\n    color: white;\r\n}\r\n\r\n.event-closed{\r\n    background-color: #550C18\r\n}\r\n\r\n.prizes{\r\n    color:goldenrod;\r\n    float:right;\r\n\r\n}\r\n\r\n.text-desc{\r\n    clear: both;\r\n    white-space: nowrap;\r\n    overflow: hidden;\r\n    text-overflow: ellipsis;\r\n}\r\n\r\na, a:focus,a:hover{\r\n    color: inherit;\r\n}"
+
+/***/ }),
+
+/***/ "./src/app/about/about.component.html":
+/*!********************************************!*\
+  !*** ./src/app/about/about.component.html ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"container home\">\r\n    <div class=\"row\">\r\n        <div *ngFor=\"let event of events_open\" class=\"col-md-4 events\">\r\n            <div class=\"panel panel-primary\">\r\n                <div class=\"panel-heading\">\r\n                        <a [routerLink]=\"['/events',event.eventId]\">{{ event.name | slice:0:18}}{{ event.name.length > 18 ? \"...\" : \"\"}}</a>\r\n                    \r\n                    <a *ngIf=\"loggedIn && userReg.indexOf(event.eventId) == -1\" class=\"register\" [routerLink]=\"['/registration',event.eventId]\">\r\n                        <i class=\"fa fa-plus\" aria-hidden=\"true\"></i>\r\n                    </a>\r\n                </div>\r\n                <div class=\"panel-body\">\r\n                    <div class=\"prizes\">\r\n                        <h4> <i class=\"fa fa-trophy\" aria-hidden=\"true\"></i>\r\n                            <span>\r\n                                {{ event.prizes | currency:'INR'}}\r\n                            </span>\r\n                        </h4>\r\n                    </div>\r\n                    <div class=\"text-desc\">\r\n                        {{ event.description }}\r\n                    </div>\r\n\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"panel panel-primary closed-events\">\r\n        <div class=\"panel-heading\">\r\n            Closed Events\r\n        </div>\r\n        <div class=\"panel-body\">\r\n            <div class=\"table-responsive\">\r\n                <table class='table table-striped table-condensed' *ngIf='events_closed && events_closed.length else elseBlock'>\r\n                    <thead>\r\n                        <tr>\r\n                            <th style=\"min-width: 80px;\">Name</th>\r\n                            <th style=\"min-width: 80px;\">Description</th>\r\n                            <th style=\"min-width: 80px;\">Status</th>\r\n                            <th style=\"min-width: 80px;\">Prize</th>\r\n                            <th style=\"min-width: 80px;\">Winner</th>\r\n                            \r\n\r\n                        </tr>\r\n                    </thead>\r\n                    <tbody>\r\n                        <tr *ngFor='let event of events_closed'>\r\n                            <td><a [routerLink]=\"['/events',event.eventId]\">{{ event.name }}</a></td>\r\n                            <td>{{ event.description | slice:0:18}}{{ event.description.length > 12 ? \"...\" : \"\"}}</td>\r\n                            <td>{{ event.status}}</td>\r\n                            <td>{{ event.prizes}}</td>\r\n                            <td *ngIf=\" events_closed.status === closed\">\r\n                                {{ event.winner ? event.winnerName : 'To Be Announced' }}</td>\r\n\r\n                        </tr>\r\n                    </tbody>\r\n                </table>\r\n                <ng-template #elseBlock>No Events to Show</ng-template>\r\n                \r\n            </div>\r\n        </div>\r\n\r\n    </div>\r\n</div>"
+
+/***/ }),
+
 /***/ "./src/app/about/about.component.ts":
 /*!******************************************!*\
   !*** ./src/app/about/about.component.ts ***!
@@ -322,20 +344,54 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AboutComponent", function() { return AboutComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _events_events_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../events/events.service */ "./src/app/events/events.service.ts");
+/* harmony import */ var _users_users_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../users/users.service */ "./src/app/users/users.service.ts");
+/* harmony import */ var _registration_registration_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../registration/registration.service */ "./src/app/registration/registration.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
 
 var AboutComponent = /** @class */ (function () {
-    function AboutComponent() {
+    function AboutComponent(_eventsService, _userService, _regService) {
+        this._eventsService = _eventsService;
+        this._userService = _userService;
+        this._regService = _regService;
     }
+    AboutComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.loggedIn = this._userService.isLoggedIn();
+        this._eventsService.getEvents().subscribe(function (events) {
+            _this.events = events;
+            _this.events_open = events.filter(function (event) { return event.status.toString().toLowerCase() === 'open'; });
+            _this.events_closed = events.filter(function (event) { return event.status.toString().toLowerCase() !== 'open'; });
+            _this.events_closed.forEach(function (element) {
+                _this._regService.getRegistrationsById(element.winner).subscribe(function (reg) {
+                    element.winnerName = reg.teamName;
+                });
+            });
+        }, function (err) { return console.log(err); });
+        this._userService.getRegistrations().subscribe(function (registration) {
+            _this.userReg = registration.map(function (reg) {
+                return parseInt(reg.eventId);
+            });
+        });
+    };
     AboutComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
-            template: "<h3>This Hackathon Event Management Application supports the various stages of the hackathon event such as Creation of a hackathon event, run the event and archive the event on completion. Within each created event, it supports the following:\n\n\t\t\ti) Advertising the Event\n\t\t\tii) Team Registration \n\t\t\tiii) Idea Submission \n\nThe final competition will go on for certain number of days which should be configurable. \nAt the end of which the participants will submit their code, executables, documents, audio and video materials supporting their problem and solution.\n</h3>"
-        })
+            selector: 'app-about',
+            template: __webpack_require__(/*! ./about.component.html */ "./src/app/about/about.component.html"),
+            styles: [__webpack_require__(/*! ./about.component.css */ "./src/app/about/about.component.css")]
+        }),
+        __metadata("design:paramtypes", [_events_events_service__WEBPACK_IMPORTED_MODULE_1__["EventsService"], _users_users_service__WEBPACK_IMPORTED_MODULE_2__["UsersService"], _registration_registration_service__WEBPACK_IMPORTED_MODULE_3__["RegistrationService"]])
     ], AboutComponent);
     return AboutComponent;
 }());
@@ -351,7 +407,7 @@ var AboutComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "a{\r\n  text-decoration: none;\r\n}\r\n\r\na.active{\r\n  color: blue;\r\n  font-weight: bold;\r\n}\r\n"
+module.exports = "html {\r\n  font-size: 16px;\r\n}\r\n\r\na{\r\n  text-decoration: none;\r\n}\r\n\r\na.active{\r\n  color: blue;\r\n  font-weight: bold;\r\n}\r\n\r\nng-sidebar-content,ng-sidebar-container,ng-sidebar{\r\n  height: 100vh;\r\n  font-size: 12px;\r\n}\r\n\r\n.header{\r\n  padding: 5vh;\r\n  text-align:center;\r\n}\r\n\r\n:host /deep/ .ng-sidebar--opened{\r\n  background-color: #337AB7;\r\n  padding: 3%;\r\n  color: white;\r\n  font-family: monospace;\r\n  height: 100vh;\r\n  font-size: 1.2em;\r\n}\r\n\r\n:host /deep/ ng-sidebar-container{\r\n  font-family: monospace;\r\n}"
 
 /***/ }),
 
@@ -362,7 +418,7 @@ module.exports = "a{\r\n  text-decoration: none;\r\n}\r\n\r\na.active{\r\n  colo
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav>\r\n\t\r\n    <a routerLink=\"\" routerLinkActive=\"active\" [routerLinkActiveOptions]=\"{exact:true}\" style=\"margin:15px;\">About</a>\r\n    <span *ngIf='isLoggedIn'>\r\n\t\t\t<span>Hi {{firstName}}!</span>\r\n\t\t\t<a routerLink=\"events\" routerLinkActive=\"active\" *ngIf='isLoggedIn' style=\"margin:15px;\">Events</a>\r\n\t\t\t<a href='' (click)='logOut()'  style=\"margin:15px;\">Logout</a>\r\n\t</span>\r\n\t<span *ngIf='!isLoggedIn'>\t\r\n\t\t<a routerLink=\"login\" routerLinkActive=\"active\" *ngIf='!isLoggedIn' style=\"margin:15px;\">Login</a>\t\r\n\t\t<a routerLink=\"signup\" routerLinkActive=\"active\" *ngIf='!isLoggedIn' style=\"margin:15px;\">SignUp</a>\r\n\t</span>\r\n</nav>\r\n<router-outlet></router-outlet>\r\n\r\n"
+module.exports = "<ng-sidebar-container>\r\n\t<ng-sidebar [(opened)]=\"_opened\" mode=\"push\" id=\"sidebar\">\r\n\t\t<p routerLink=\"\" routerLinkActive=\"active\" [routerLinkActiveOptions]=\"{exact:true}\"><i class=\"fa fa-home\"\r\n\t\t\t\taria-hidden=\"true\"></i> Home</p>\r\n\t\t<span *ngIf='isLoggedIn'>\r\n\t\t\t\r\n\t\t\t<p routerLink=\"events\" routerLinkActive=\"active\" *ngIf='isLoggedIn'>\r\n\t\t\t\t\t<i class=\"fa fa-tachometer\" aria-hidden=\"true\"></i>\r\n\t\t\t\t\tDashboard\r\n\t\t\t</p>\r\n\t\t\t<hr>\r\n\t\t\t<span>Hi {{firstName}}!</span>\r\n\t\t\t<p (click)='logOut()'>\r\n\t\t\t\t\t<i class=\"fa fa-sign-out\" aria-hidden=\"true\"></i>\r\n\t\t\t\t\tLogout\r\n\t\t\t</p>\r\n\t\t</span>\r\n\t\t<span *ngIf='!isLoggedIn'>\r\n\t\t\t<p routerLink=\"login\" routerLinkActive=\"active\" *ngIf='!isLoggedIn'><i class=\"fa fa-sign-in\"\r\n\t\t\t\t\taria-hidden=\"true\"></i> Login</p>\r\n\t\t\t<p routerLink=\"signup\" routerLinkActive=\"active\" *ngIf='!isLoggedIn'>\r\n\t\t\t\t<i class=\"fa fa-user-plus\" aria-hidden=\"true\"></i>\r\n\t\t\t\tSignUp\r\n\t\t\t</p>\r\n\t\t</span>\r\n\t</ng-sidebar>\r\n\t<!-- Page content -->\r\n\t<div ng-sidebar-content>\r\n\t\t<div class=\"header\">\r\n\t\t\t<h1>Hackathon</h1>\r\n\t\t</div>\r\n\t\t<router-outlet></router-outlet>\r\n\r\n\r\n\t</div>\r\n\r\n\r\n</ng-sidebar-container>"
 
 /***/ }),
 
@@ -400,7 +456,8 @@ var AppComponent = /** @class */ (function () {
         this.toastr = toastr;
         this.title = 'Hackathon Event Management';
         this.isLoggedIn = false;
-        this.firstName = "";
+        this.firstName = ' ';
+        this._opened = true;
     }
     AppComponent.prototype.ngDoCheck = function () {
         this.isLoggedIn = this._userService.isLoggedIn();
@@ -410,7 +467,10 @@ var AppComponent = /** @class */ (function () {
         this._userService.logout();
         this.isLoggedIn = false;
         this.router.navigate(['login']);
-        this.toastr.success("Logged Out Successfully!!");
+        this.toastr.success('Logged Out Successfully!!');
+    };
+    AppComponent.prototype._toggleSidebar = function () {
+        this._opened = !this._opened;
     };
     AppComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -443,32 +503,37 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/http */ "./node_modules/@angular/http/fesm5/http.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 /* harmony import */ var _ng_select_ng_select__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ng-select/ng-select */ "./node_modules/@ng-select/ng-select/fesm5/ng-select.js");
-/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm5/animations.js");
-/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ngx-toastr */ "./node_modules/ngx-toastr/fesm5/ngx-toastr.js");
-/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
-/* harmony import */ var _app_routing__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./app.routing */ "./src/app/app.routing.ts");
-/* harmony import */ var _about_about_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./about/about.component */ "./src/app/about/about.component.ts");
-/* harmony import */ var _users_login_form_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./users/login-form.component */ "./src/app/users/login-form.component.ts");
-/* harmony import */ var _users_user_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./users/user.component */ "./src/app/users/user.component.ts");
-/* harmony import */ var _users_adduser_form_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./users/adduser-form.component */ "./src/app/users/adduser-form.component.ts");
-/* harmony import */ var _users_edituser_form_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./users/edituser-form.component */ "./src/app/users/edituser-form.component.ts");
-/* harmony import */ var _users_users_filter_pipe__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./users/users-filter.pipe */ "./src/app/users/users-filter.pipe.ts");
-/* harmony import */ var _users_users_service__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./users/users.service */ "./src/app/users/users.service.ts");
-/* harmony import */ var _events_events_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./events/events.component */ "./src/app/events/events.component.ts");
-/* harmony import */ var _events_event_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./events/event.component */ "./src/app/events/event.component.ts");
-/* harmony import */ var _events_addevent_form_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./events/addevent-form.component */ "./src/app/events/addevent-form.component.ts");
-/* harmony import */ var _events_editevent_form_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./events/editevent-form.component */ "./src/app/events/editevent-form.component.ts");
-/* harmony import */ var _events_events_filter_pipe__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./events/events-filter.pipe */ "./src/app/events/events-filter.pipe.ts");
-/* harmony import */ var _events_events_service__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./events/events.service */ "./src/app/events/events.service.ts");
-/* harmony import */ var _registration_registration_component__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./registration/registration.component */ "./src/app/registration/registration.component.ts");
-/* harmony import */ var _registration_registration_service__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./registration/registration.service */ "./src/app/registration/registration.service.ts");
-/* harmony import */ var _registration_view_registration_component__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./registration/view-registration.component */ "./src/app/registration/view-registration.component.ts");
+/* harmony import */ var ng_sidebar__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ng-sidebar */ "./node_modules/ng-sidebar/lib/index.js");
+/* harmony import */ var ng_sidebar__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(ng_sidebar__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var ngx_chips__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ngx-chips */ "./node_modules/ngx-chips/fesm5/ngx-chips.js");
+/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm5/animations.js");
+/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ngx-toastr */ "./node_modules/ngx-toastr/fesm5/ngx-toastr.js");
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
+/* harmony import */ var _app_routing__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./app.routing */ "./src/app/app.routing.ts");
+/* harmony import */ var _about_about_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./about/about.component */ "./src/app/about/about.component.ts");
+/* harmony import */ var _users_login_form_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./users/login-form.component */ "./src/app/users/login-form.component.ts");
+/* harmony import */ var _users_user_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./users/user.component */ "./src/app/users/user.component.ts");
+/* harmony import */ var _users_adduser_form_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./users/adduser-form.component */ "./src/app/users/adduser-form.component.ts");
+/* harmony import */ var _users_edituser_form_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./users/edituser-form.component */ "./src/app/users/edituser-form.component.ts");
+/* harmony import */ var _users_users_filter_pipe__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./users/users-filter.pipe */ "./src/app/users/users-filter.pipe.ts");
+/* harmony import */ var _users_users_service__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./users/users.service */ "./src/app/users/users.service.ts");
+/* harmony import */ var _events_events_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./events/events.component */ "./src/app/events/events.component.ts");
+/* harmony import */ var _events_event_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./events/event.component */ "./src/app/events/event.component.ts");
+/* harmony import */ var _events_addevent_form_component__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./events/addevent-form.component */ "./src/app/events/addevent-form.component.ts");
+/* harmony import */ var _events_editevent_form_component__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./events/editevent-form.component */ "./src/app/events/editevent-form.component.ts");
+/* harmony import */ var _events_events_filter_pipe__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./events/events-filter.pipe */ "./src/app/events/events-filter.pipe.ts");
+/* harmony import */ var _events_events_service__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./events/events.service */ "./src/app/events/events.service.ts");
+/* harmony import */ var _registration_registration_component__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./registration/registration.component */ "./src/app/registration/registration.component.ts");
+/* harmony import */ var _registration_registration_service__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./registration/registration.service */ "./src/app/registration/registration.service.ts");
+/* harmony import */ var _registration_view_registration_component__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./registration/view-registration.component */ "./src/app/registration/view-registration.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -501,25 +566,33 @@ var AppModule = /** @class */ (function () {
     }
     AppModule = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"])({
-            imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"], _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_6__["BrowserAnimationsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"], _ng_select_ng_select__WEBPACK_IMPORTED_MODULE_5__["NgSelectModule"], _angular_http__WEBPACK_IMPORTED_MODULE_3__["HttpModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClientModule"], _app_routing__WEBPACK_IMPORTED_MODULE_9__["routing"], ngx_toastr__WEBPACK_IMPORTED_MODULE_7__["ToastrModule"].forRoot()],
+            imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
+                ngx_chips__WEBPACK_IMPORTED_MODULE_7__["TagInputModule"],
+                _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_8__["BrowserAnimationsModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"],
+                _ng_select_ng_select__WEBPACK_IMPORTED_MODULE_5__["NgSelectModule"],
+                _angular_http__WEBPACK_IMPORTED_MODULE_3__["HttpModule"],
+                _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClientModule"],
+                _app_routing__WEBPACK_IMPORTED_MODULE_11__["routing"], ngx_toastr__WEBPACK_IMPORTED_MODULE_9__["ToastrModule"].forRoot(),
+                ng_sidebar__WEBPACK_IMPORTED_MODULE_6__["SidebarModule"].forRoot()],
             declarations: [
-                _app_component__WEBPACK_IMPORTED_MODULE_8__["AppComponent"],
-                _about_about_component__WEBPACK_IMPORTED_MODULE_10__["AboutComponent"],
-                _users_login_form_component__WEBPACK_IMPORTED_MODULE_11__["LoginFormComponent"],
-                _users_user_component__WEBPACK_IMPORTED_MODULE_12__["UserComponent"],
-                _users_adduser_form_component__WEBPACK_IMPORTED_MODULE_13__["AddUserFormComponent"],
-                _users_edituser_form_component__WEBPACK_IMPORTED_MODULE_14__["EditUserFormComponent"],
-                _users_users_filter_pipe__WEBPACK_IMPORTED_MODULE_15__["UserFilterPipe"],
-                _events_events_component__WEBPACK_IMPORTED_MODULE_17__["EventsComponent"],
-                _events_event_component__WEBPACK_IMPORTED_MODULE_18__["EventComponent"],
-                _events_addevent_form_component__WEBPACK_IMPORTED_MODULE_19__["AddEventFormComponent"],
-                _events_editevent_form_component__WEBPACK_IMPORTED_MODULE_20__["EditEventFormComponent"],
-                _registration_registration_component__WEBPACK_IMPORTED_MODULE_23__["RegistrationComponent"],
-                _registration_view_registration_component__WEBPACK_IMPORTED_MODULE_25__["ViewRegistrationComponent"],
-                _events_events_filter_pipe__WEBPACK_IMPORTED_MODULE_21__["EventFilterPipe"]
+                _app_component__WEBPACK_IMPORTED_MODULE_10__["AppComponent"],
+                _about_about_component__WEBPACK_IMPORTED_MODULE_12__["AboutComponent"],
+                _users_login_form_component__WEBPACK_IMPORTED_MODULE_13__["LoginFormComponent"],
+                _users_user_component__WEBPACK_IMPORTED_MODULE_14__["UserComponent"],
+                _users_adduser_form_component__WEBPACK_IMPORTED_MODULE_15__["AddUserFormComponent"],
+                _users_edituser_form_component__WEBPACK_IMPORTED_MODULE_16__["EditUserFormComponent"],
+                _users_users_filter_pipe__WEBPACK_IMPORTED_MODULE_17__["UserFilterPipe"],
+                _events_events_component__WEBPACK_IMPORTED_MODULE_19__["EventsComponent"],
+                _events_event_component__WEBPACK_IMPORTED_MODULE_20__["EventComponent"],
+                _events_addevent_form_component__WEBPACK_IMPORTED_MODULE_21__["AddEventFormComponent"],
+                _events_editevent_form_component__WEBPACK_IMPORTED_MODULE_22__["EditEventFormComponent"],
+                _registration_registration_component__WEBPACK_IMPORTED_MODULE_25__["RegistrationComponent"],
+                _registration_view_registration_component__WEBPACK_IMPORTED_MODULE_27__["ViewRegistrationComponent"],
+                _events_events_filter_pipe__WEBPACK_IMPORTED_MODULE_23__["EventFilterPipe"]
             ],
-            providers: [_users_users_service__WEBPACK_IMPORTED_MODULE_16__["UsersService"], _events_events_service__WEBPACK_IMPORTED_MODULE_22__["EventsService"], _registration_registration_service__WEBPACK_IMPORTED_MODULE_24__["RegistrationService"]],
-            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_8__["AppComponent"]]
+            providers: [_users_users_service__WEBPACK_IMPORTED_MODULE_18__["UsersService"], _events_events_service__WEBPACK_IMPORTED_MODULE_24__["EventsService"], _registration_registration_service__WEBPACK_IMPORTED_MODULE_26__["RegistrationService"]],
+            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_10__["AppComponent"]]
         })
     ], AppModule);
     return AppModule;
@@ -575,6 +648,17 @@ var appRoutes = [
 ];
 var routing = _angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"].forRoot(appRoutes);
 
+
+/***/ }),
+
+/***/ "./src/app/events/addevent-form.component.css":
+/*!****************************************************!*\
+  !*** ./src/app/events/addevent-form.component.css ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "div.panel.panel-primary{\r\n    margin : 5vh auto;\r\n    width: 50%;\r\n    font-size: 1.5em;\r\n}\r\n\r\ninput, select{\r\n    font-size: 1em;\r\n}\r\n\r\n"
 
 /***/ }),
 
@@ -645,7 +729,7 @@ var AddEventFormComponent = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'addevent-form',
             template: __webpack_require__(/*! ./addevent-form.component.html */ "./src/app/events/addevent-form.component.html"),
-            styles: ['.panel {margin:15px;}']
+            styles: [__webpack_require__(/*! ./addevent-form.component.css */ "./src/app/events/addevent-form.component.css")]
         }),
         __metadata("design:paramtypes", [_events_service__WEBPACK_IMPORTED_MODULE_2__["EventsService"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]])
     ], AddEventFormComponent);
@@ -653,6 +737,17 @@ var AddEventFormComponent = /** @class */ (function () {
 }());
 
 
+
+/***/ }),
+
+/***/ "./src/app/events/editevent-form.component.css":
+/*!*****************************************************!*\
+  !*** ./src/app/events/editevent-form.component.css ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "div.panel.panel-primary{\r\n    margin : 5vh auto;\r\n    width: 50%;\r\n    font-size: 1.5em;\r\n}\r\n\r\ninput, select{\r\n    font-size: 1em;\r\n}"
 
 /***/ }),
 
@@ -736,7 +831,7 @@ var EditEventFormComponent = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'editevent-form',
             template: __webpack_require__(/*! ./editevent-form.component.html */ "./src/app/events/editevent-form.component.html"),
-            styles: ['.panel {margin:15px;}']
+            styles: [__webpack_require__(/*! ./editevent-form.component.css */ "./src/app/events/editevent-form.component.css")]
         }),
         __metadata("design:paramtypes", [_events_service__WEBPACK_IMPORTED_MODULE_2__["EventsService"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]])
     ], EditEventFormComponent);
@@ -754,7 +849,7 @@ var EditEventFormComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "label {\r\n  display: inline-block;\r\n  width: 3em;\r\n  margin: .5em 0;\r\n  color: #607D8B;\r\n  font-weight: bold;\r\n}\r\ninput {\r\n  height: 2em;\r\n  font-size: 1em;\r\n  padding-left: .4em;\r\n}\r\nbutton {\r\n  margin-top: 20px;\r\n  font-family: Arial;\r\n  background-color: #eee;\r\n  border: none;\r\n  padding: 5px 10px;\r\n  border-radius: 4px;\r\n  cursor: pointer; cursor: hand;\r\n}\r\nbutton:hover {\r\n  background-color: #cfd8dc;\r\n}\r\nbutton:disabled {\r\n  background-color: #eee;\r\n  color: #ccc; \r\n  cursor: auto;\r\n}\r\n"
+module.exports = "label {\r\n  display: inline-block;\r\n  width: 3em;\r\n  margin: .5em 0;\r\n  color: #607D8B;\r\n  font-weight: bold;\r\n}\r\ninput {\r\n  height: 2em;\r\n  font-size: 1em;\r\n  padding-left: .4em;\r\n}\r\nbutton {\r\n  margin-top: 20px;\r\n  font-family: Arial;\r\n  background-color: #eee;\r\n  border: none;\r\n  padding: 5px 10px;\r\n  border-radius: 4px;\r\n  cursor: pointer; cursor: hand;\r\n}\r\nbutton:hover {\r\n  background-color: #cfd8dc;\r\n}\r\nbutton:disabled {\r\n  background-color: #eee;\r\n  color: #ccc; \r\n  cursor: auto;\r\n}\r\ndiv.panel.panel-primary{\r\n  margin : 5vh auto;\r\n  width: 75%;\r\n  font-size: 1.2em;\r\n}\r\n"
 
 /***/ }),
 
@@ -765,7 +860,7 @@ module.exports = "label {\r\n  display: inline-block;\r\n  width: 3em;\r\n  marg
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class='panel panel-primary'>\r\n    \r\n\t<div class='panel-heading'>\r\n      Event Details\r\n\t</div>\r\n\t<div class='panel-body'>\t\t\r\n\t\t<table class=\"table\" style=\"margin-left:20px\">\r\n\t\t  <tr>\r\n\t\t\t<td>ID:</td>\r\n\t\t\t<td>{{event.eventId}}</td>\r\n\t\t  </tr>\r\n\t\t  <tr>\r\n\t\t\t<td>Name:</td>\r\n\t\t\t<td>{{event.name}}</td>\r\n\t\t  </tr>\r\n\t\t  <tr>\r\n\t\t\t<td>Description:</td>\r\n\t\t\t<td>{{event.description}}</td>\r\n\t\t  </tr>\r\n\t\t  <tr>\r\n\t\t\t<td>Start Date:</td>\r\n\t\t\t<td>{{event.startDate}}</td>\r\n\t\t  </tr>\r\n\t\t  <tr>\r\n\t\t\t<td>End Date:</td>\r\n\t\t\t<td>{{event.endDate}}</td>\r\n\t\t  </tr>\r\n\t\t  <tr>\r\n\t\t\t<td>Status:</td>\r\n\t\t\t<td>{{event.status}}</td>\r\n\t\t  </tr>\r\n\t\t  <tr>\r\n\t\t\t<td>No. of Teams:</td>\r\n\t\t\t<td>{{event.noOfTeams}}</td>\r\n\t\t  </tr>\r\n\t\t  <tr>\r\n\t\t\t<td>Max Team Size:</td>\r\n\t\t\t<td>{{event.maxTeamSize}}</td>\r\n\t\t  </tr>\r\n\t\t  <tr>\r\n\t\t\t<td>Prizes:</td>\r\n\t\t\t<td>{{event.prizes}}</td>\r\n\t\t  </tr>\r\n\t\t  <tr>\r\n\t\t\t<td>Hackathon Host:</td>\r\n\t\t\t<td>{{event.hackathonHost}}</td>\r\n\t\t  </tr>\r\n\t\t \r\n\t\t</table>\r\n\t\t<button (click)=\"goBack()\">Back</button>\r\n\t</div>\r\n</div>\r\n"
+module.exports = "<div class='panel panel-primary'>\r\n\r\n\t<div class='panel-heading'>\r\n\t\tEvent Details\r\n\t</div>\r\n\t<div class='panel-body'>\r\n\t\t<div class=\"table-responsive\">\r\n\t\t\t<table class=\"table\" style=\"margin-left:20px\">\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<td>Name:</td>\r\n\t\t\t\t\t<td>{{event.name}}</td>\r\n\t\t\t\t</tr>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<td>Description:</td>\r\n\t\t\t\t\t<td>{{event.description}}</td>\r\n\t\t\t\t</tr>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<td>Start Date:</td>\r\n\t\t\t\t\t<td>{{event.startDate}}</td>\r\n\t\t\t\t</tr>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<td>End Date:</td>\r\n\t\t\t\t\t<td>{{event.endDate}}</td>\r\n\t\t\t\t</tr>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<td>Status:</td>\r\n\t\t\t\t\t<td>{{event.status}}</td>\r\n\t\t\t\t</tr>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<td>No. of Teams:</td>\r\n\t\t\t\t\t<td>{{event.noOfTeams}}</td>\r\n\t\t\t\t</tr>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<td>Max Team Size:</td>\r\n\t\t\t\t\t<td>{{event.maxTeamSize}}</td>\r\n\t\t\t\t</tr>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<td>Prizes:</td>\r\n\t\t\t\t\t<td>{{event.prizes}}</td>\r\n\t\t\t\t</tr>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<td>Hackathon Host:</td>\r\n\t\t\t\t\t<td>{{event.hackathonHost}}</td>\r\n\t\t\t\t</tr>\r\n\r\n\t\t\t</table>\r\n\t\t</div>\r\n\r\n\t\t<button (click)=\"goBack()\">Back</button>\r\n\t</div>\r\n</div>"
 
 /***/ }),
 
@@ -871,7 +966,7 @@ var EventFilterPipe = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".panel {\r\n  margin:15px;\r\n}"
+module.exports = ".panel {\r\n  margin: 0 3%;\r\n}"
 
 /***/ }),
 
@@ -882,7 +977,7 @@ module.exports = ".panel {\r\n  margin:15px;\r\n}"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class='panel panel-primary'>\r\n\r\n    <div class='panel-heading'>\r\n        {{title}}\r\n    </div>\r\n    <div class='panel-body'>\r\n        <div class='row'>\r\n            <div class='col-md-1'>Event Filter:</div>\r\n            <div class='col-md-3'>\r\n                <input type='text' [(ngModel)]='descriptionFilter' class=\"form-control\" />\r\n            </div>\r\n            <!--<div class='col-md-1'>Show Fields:</div>\r\n            <div class='col-md-5'>\r\n                    <input type=\"checkbox\" (click)=\"onOff('desc')\" checked>Description\r\n                    <input type=\"checkbox\" (click)=\"onOff('seve')\" checked>Severity\r\n                    <input type=\"checkbox\" (click)=\"onOff('stat')\" checked>Status\r\n                    <input type=\"checkbox\" (click)=\"onOff('cdate')\" checked>Created Date\r\n                    <input type=\"checkbox\" (click)=\"onOff('rdate')\" checked>Resolved Date\r\n            </div>-->\r\n        </div>\r\n        <br>\r\n        <table class='table table-striped table-condensed' *ngIf='events && events.length'>\r\n            <thead>\r\n                <tr>\r\n                    <th style=\"min-width: 80px;\">Event#</th>\r\n                    <th style=\"min-width: 80px;\">Name</th>\r\n                    <th style=\"min-width: 80px;\">Description</th>\r\n                    <th style=\"min-width: 100px;\">Start Date</th>\r\n                    <th style=\"min-width: 60px;\">End Date</th>\r\n                    <th style=\"min-width: 80px;\">Status</th>\r\n                    <th style=\"min-width: 80px;\">Teams</th>\r\n                    <th style=\"min-width: 80px;\">Prizes</th>\r\n                    <th style=\"min-width: 80px;\">Host</th>\r\n                    <th style=\"width:20px;\"> </th>\r\n                    <th style=\"width:80px;\"> </th>\r\n                </tr>\r\n            </thead>\r\n            <tbody>\r\n                <tr *ngFor='let event of events | eventFilter: descriptionFilter'>\r\n                    <td>{{ event.eventId }}</td>\r\n                    <td>{{ event.name }}</td>\r\n                    <td>{{ event.description }}</td>\r\n                    <td>{{ event.startDate | date:\"dd-MMM-yy\" }}</td>\r\n                    <td>{{ event.endDate | date:\"dd-MMM-yy\" }}</td>\r\n                    <td>{{ event.status }}</td>\r\n                    <td>{{ event.noOfTeams }}</td>\r\n                    <td>{{ event.prizes }}</td>\r\n                    <td>{{ event.hackathonHost }}</td>\r\n                    <td *ngIf=\"userRole != 'admin' && userReg.indexOf(event.eventId) == -1\"><a\r\n                            [routerLink]=\"['/registration',event.eventId]\" class=\"btn btn-xs btn-primary\">Register</a>\r\n                    </td>\r\n                    <td *ngIf=\"userReg.indexOf(event.eventId) > -1\" class=\"btn btn-success\">Registered</td>\r\n                    <td *ngIf=\"userRole == 'admin'\"><a [routerLink]=\"['/editEvent',event.eventId]\"\r\n                            class=\"btn btn-xs btn-primary\">Edit</a></td>\r\n                    <td *ngIf=\"userRole == 'admin'\"><a (click)=\"deleteEvent(event.eventId)\"\r\n                            class=\"btn btn-xs btn-danger\">Delete</a>\r\n                        <input *ngIf=\"userRole == 'admin' \" style=\"margin-left: 5px;\" type=\"checkbox\"\r\n                            (click)=\"stateChanged($event,event.eventId)\">\r\n                    </td>\r\n                    <td *ngIf=\"userRole == 'admin'\"><a [routerLink]=\"['/registration/view',event.eventId]\"\r\n                            class=\"btn btn-xs btn-primary\">View Registrations</a></td>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n        <a *ngIf=\"userRole == 'admin'\" routerLink=\"/addEvent\" class=\"btn btn-xs btn-primary\">Add Event</a>\r\n        <a *ngIf=\"userRole == 'admin'\" (click)=\"bulkDelete()\" class=\"btn btn-xs btn-danger pull-right\">Bulk Delete</a>\r\n    </div>\r\n</div>"
+module.exports = "<div class='panel panel-primary'>\r\n\r\n    <div class='panel-heading'>\r\n        {{title}}\r\n    </div>\r\n    <div class='panel-body'>\r\n        <div class='row'>\r\n            <div class='col-md-1'>Event Filter:</div>\r\n            <div class='col-md-3'>\r\n                <input type='text' [(ngModel)]='descriptionFilter' class=\"form-control\" />\r\n            </div>\r\n            <!--<div class='col-md-1'>Show Fields:</div>\r\n            <div class='col-md-5'>\r\n                    <input type=\"checkbox\" (click)=\"onOff('desc')\" checked>Description\r\n                    <input type=\"checkbox\" (click)=\"onOff('seve')\" checked>Severity\r\n                    <input type=\"checkbox\" (click)=\"onOff('stat')\" checked>Status\r\n                    <input type=\"checkbox\" (click)=\"onOff('cdate')\" checked>Created Date\r\n                    <input type=\"checkbox\" (click)=\"onOff('rdate')\" checked>Resolved Date\r\n            </div>-->\r\n        </div>\r\n        <br>\r\n        <div class=\"table-responsive\">\r\n            <table class='table table-striped table-condensed' *ngIf='events && events.length'>\r\n                <thead>\r\n                    <tr>\r\n                        <th style=\"min-width: 80px;\">Event#</th>\r\n                        <th style=\"min-width: 80px;\">Name</th>\r\n                        <th style=\"min-width: 80px;\">Description</th>\r\n                        <th style=\"min-width: 100px;\">Start Date</th>\r\n                        <th style=\"min-width: 60px;\">End Date</th>\r\n                        <th style=\"min-width: 80px;\">Teams</th>\r\n                        <th style=\"min-width: 80px;\">Prizes</th>\r\n                        <th style=\"min-width: 80px;\">Status</th>\r\n                        <th style=\"width:20px;\"> </th>\r\n                        <th *ngIf=\"userRole == 'admin'\" style=\"width:80px;\"> </th>\r\n                    </tr>\r\n                </thead>\r\n                <tbody>\r\n                    <tr *ngFor='let event of events | eventFilter: descriptionFilter'>\r\n                        <td>{{ event.eventId }}</td>\r\n                        <td><a [routerLink]=\"['/events',event.eventId]\">{{ event.name }}</a></td>\r\n                        <td>{{ event.description | slice:0:18}}{{ event.description.length > 18 ? \"...\" : \"\"}}</td>\r\n                        <td>{{ event.startDate | date:\"dd-MMM-yy\" }}</td>\r\n                        <td>{{ event.endDate | date:\"dd-MMM-yy\" }}</td>\r\n                        <td>{{ event.noOfTeams }}</td>\r\n                        <td>{{ event.prizes }}</td>\r\n                        <td>{{ event.status | uppercase }}</td>\r\n                        <td\r\n                            *ngIf=\"userRole != 'admin' && userReg.indexOf(event.eventId) == -1 && event.status === 'Open' \">\r\n                            <a [routerLink]=\"['/registration',event.eventId]\"\r\n                                class=\"btn btn-xs btn-primary\">Register</a>\r\n                        </td>\r\n                        <td *ngIf=\"userReg.indexOf(event.eventId) > -1\" class=\"btn btn-success\">Registered</td>\r\n                        <td *ngIf=\"userRole == 'admin'\"><a [routerLink]=\"['/editEvent',event.eventId]\"><i\r\n                                    class=\"fa fa-pencil-square-o fa-2x\" aria-hidden=\"true\"></i></a></td>\r\n                        <td *ngIf=\"userRole == 'admin'\"><a (click)=\"deleteEvent(event.eventId)\"><i\r\n                                    class=\"fa fa-trash fa-2x\" aria-hidden=\"true\"></i></a>\r\n                            <input *ngIf=\"userRole == 'admin' \" style=\"margin-left: 5px;\" type=\"checkbox\"\r\n                                (click)=\"stateChanged($event,event.eventId)\">\r\n                        </td>\r\n                        <td *ngIf=\"userRole == 'admin'\"><a [routerLink]=\"['/registration/view',event.eventId]\"\r\n                                class=\"btn btn-xs btn-primary\">View Registrations</a></td>\r\n                    </tr>\r\n                </tbody>\r\n            </table>\r\n        </div>\r\n\r\n        <a *ngIf=\"userRole == 'admin'\" routerLink=\"/addEvent\" class=\"btn btn-xs btn-primary\">Add Event</a>\r\n        <a *ngIf=\"userRole == 'admin'\" (click)=\"bulkDelete()\" class=\"btn btn-xs btn-danger pull-right\">Bulk Delete</a>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
@@ -1070,7 +1165,7 @@ var EventsService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = "div.panel.panel-primary{\r\n    margin : 5vh auto;\r\n    width: 50%;\r\n    font-size: 1.5em;\r\n}\r\n\r\ninput{\r\n    font-size: 1.2em;\r\n}"
 
 /***/ }),
 
@@ -1081,7 +1176,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class='panel panel-primary'>\r\n  <div class='panel-heading'>\r\n    {{title}}\r\n  </div>\r\n  <div class='panel-body'>\r\n    <form #formRef=\"ngForm\" (ngSubmit)=\"onSubmit(formRef.value)\">\r\n      <div class=\"form-group\">\r\n        <label for=\"name\">Team Name</label>\r\n        <input type=\"text\" class=\"form-control\" id=\"name\" name=\"name\" [(ngModel)]=\"name\" required minlength=\"3\" #nameRef=\"ngModel\">\r\n        <div *ngIf=\"nameRef.invalid && (nameRef.dirty || nameRef.touched)\" class=\"alert alert-danger\">\r\n          <div *ngIf=\"nameRef.errors.required\">\r\n            Name of the event is required.\r\n          </div>\r\n          <div *ngIf=\"nameRef.errors.minlength\">\r\n            Name must be at least 3 characters long.\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <label for=\"description\">Description</label>\r\n        <input type=\"text\" class=\"form-control\" id=\"description\" name=\"description\" [(ngModel)]=\"description\" required minlength=\"10\"\r\n          #descRef=\"ngModel\">\r\n        <div *ngIf=\"descRef.invalid && (descRef.dirty || descRef.touched)\" class=\"alert alert-danger\">\r\n          <div *ngIf=\"descRef.errors.required\">\r\n            Description is required.\r\n          </div>\r\n          <div *ngIf=\"descRef.errors.minlength\">\r\n            Description must be at least 10 characters long.\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <label for=\"members\">Members</label>\r\n        <ng-select [items]=\"members\" [multiple]=\"true\" bindLabel=\"fullname\" bindValue=\"email\" name=\"members\" [(ngModel)]=\"selectedMembers\"\r\n          #memRef=\"ngModel\" required>\r\n\r\n        </ng-select>\r\n      </div>\r\n     \r\n      <button type=\"submit\" class=\"btn btn-info\" [disabled]=\"formRef.invalid\">Submit</button>\r\n\r\n    </form>\r\n  </div>\r\n</div>"
+module.exports = "<div class='panel panel-primary'>\r\n  <div class='panel-heading'>\r\n    {{title}}\r\n  </div>\r\n  <div class='panel-body'>\r\n    <form #formRef=\"ngForm\" (ngSubmit)=\"onSubmit(formRef.value)\">\r\n      <div class=\"form-group\">\r\n        <label for=\"name\">Team Name</label>\r\n        <input type=\"text\" class=\"form-control\" id=\"name\" name=\"name\" [(ngModel)]=\"name\" required minlength=\"3\"\r\n          #nameRef=\"ngModel\">\r\n        <div *ngIf=\"nameRef.invalid && (nameRef.dirty || nameRef.touched)\" class=\"alert alert-danger\">\r\n          <div *ngIf=\"nameRef.errors.required\">\r\n            Name of the event is required.\r\n          </div>\r\n          <div *ngIf=\"nameRef.errors.minlength\">\r\n            Name must be at least 3 characters long.\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <label for=\"description\">Description</label>\r\n        <input type=\"text\" class=\"form-control\" id=\"description\" name=\"description\" [(ngModel)]=\"description\" required\r\n          minlength=\"10\" #descRef=\"ngModel\">\r\n        <div *ngIf=\"descRef.invalid && (descRef.dirty || descRef.touched)\" class=\"alert alert-danger\">\r\n          <div *ngIf=\"descRef.errors.required\">\r\n            Description is required.\r\n          </div>\r\n          <div *ngIf=\"descRef.errors.minlength\">\r\n            Description must be at least 10 characters long.\r\n          </div>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <tag-input [maxItems]='' [validators]=\"validators\" [errorMessages]=\"errorMessages\" [placeholder]=\"'+Email'\" [secondaryPlaceholder]=\"'Team Member Emails '\" [(ngModel)]='selectedMembers' name=\"members\" \r\n          required>\r\n        </tag-input>\r\n\r\n      </div>\r\n\r\n\r\n      <button type=\"submit\" class=\"btn btn-info\" [disabled]=\"formRef.invalid\">Submit</button>\r\n\r\n    </form>\r\n  </div>\r\n</div>"
 
 /***/ }),
 
@@ -1123,6 +1218,10 @@ var RegistrationComponent = /** @class */ (function () {
         this.router = router;
         this.title = "Registration for Hackathon";
         this.statuses = ["Open", "In Progress", "Closed"];
+        this.validators = [this.must_be_email];
+        this.errorMessages = {
+            'must_be_email': 'Enter valid email adress!'
+        };
     }
     RegistrationComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -1139,17 +1238,26 @@ var RegistrationComponent = /** @class */ (function () {
     RegistrationComponent.prototype.onSubmit = function (formValue) {
         var _this = this;
         console.log("Form Value = " + JSON.stringify(formValue, null, 4));
-        formValue.members.push(localStorage.getItem("email"));
+        var members = formValue.members.map(function (a) { return a.value; });
+        members.push(localStorage.getItem("email"));
+        console.log(members);
         var newReg = {
             eventId: this.route.snapshot.params.id,
             teamName: formValue.name,
             teamDescription: formValue.description,
-            teamMembers: formValue.members,
+            teamMembers: members,
         };
         this._registrationService.addReg(newReg).subscribe(function (val) {
             _this.router.navigate(['events']);
             _this.toastr.success("You have successfully Registered for the event");
         });
+    };
+    RegistrationComponent.prototype.must_be_email = function (control) {
+        var EMAIL_REGEXP = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
+        if (control.value != "" && (!EMAIL_REGEXP.test(control.value))) {
+            return { "must_be_email": true };
+        }
+        return null;
     };
     RegistrationComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -1216,13 +1324,21 @@ var RegistrationService = /** @class */ (function () {
         var getEventURL = this._regUrl + "/view/" + id;
         return this._http.get(getEventURL, this.httpOptions);
     };
+    RegistrationService.prototype.getRegistrationsById = function (id) {
+        var getEventURL = this._regUrl + "/" + id;
+        return this._http.get(getEventURL, this.httpOptions);
+    };
+    RegistrationService.prototype.getRegByUser = function (email) {
+        var getEventURL = this._regUrl + "/checkreg/" + email;
+        return this._http.get(getEventURL, this.httpOptions);
+    };
     RegistrationService.prototype.addReg = function (newReg) {
         var addRegURL = this._regUrl + "/add";
         return this._http.post(addRegURL, newReg, this.httpOptions);
     };
-    RegistrationService.prototype.updateReg = function (updatedEvent) {
-        var updateEventURL = this._regUrl + "/edit/" + updatedEvent.eventId;
-        return this._http.post(updateEventURL, updatedEvent, this.httpOptions);
+    RegistrationService.prototype.updateReg = function (regId) {
+        var updateEventURL = this._regUrl + "/winner/" + regId;
+        return this._http.put(updateEventURL, this.httpOptions);
     };
     RegistrationService.prototype.deleteReg = function (id) {
         var deleteEventURL = this._regUrl + "/delete/" + id;
@@ -1247,7 +1363,7 @@ var RegistrationService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = "div.panel.panel-primary{\r\n    margin : 5vh auto;\r\n    width: 75%;\r\n    font-size: 1.2em;\r\n}\r\n\r\n"
 
 /***/ }),
 
@@ -1258,7 +1374,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class='panel panel-primary'>\r\n    \r\n    <div class='panel-heading'>\r\n        {{title}}\r\n    </div>\r\n    <div class='panel-body'>\r\n        <br>\r\n        <table class='table table-striped table-condensed' *ngIf='regs && regs.length'>\r\n            <thead>\r\n                <tr>\r\n                    <th style=\"min-width: 80px;\">Registration#</th>\r\n                    <th style=\"min-width: 80px;\">Team Name</th>\r\n                    <th style=\"min-width: 80px;\">Team Description</th>                    \r\n                    <th style=\"min-width: 80px;\">Team Members</th>\r\n                    <th style=\"width:20px;\"> </th>\r\n                    <th style=\"width:80px;\"> </th>\r\n                </tr>\r\n            </thead>\r\n            <tbody>\r\n                <tr *ngFor='let reg of regs'>\r\n                    <td >{{ reg.regId }}</td>\r\n                    <td ><a [routerLink]=\"reg.regId\">{{ reg.teamName }}</a></td>\r\n                    <td >{{ reg.teamDescription }}</td>\r\n                    <td >{{ reg.teamMembers }}</td>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n    </div>\r\n</div>\r\n\r\n\r\n\r\n\r\n"
+module.exports = "<div class='panel panel-primary'>\r\n\r\n    <div class='panel-heading'>\r\n        {{title}}\r\n    </div>\r\n    <div class='panel-body'>\r\n        <br>\r\n\r\n        <form #formRef=\"ngForm\" (ngSubmit)=\"onSubmit(formRef.value)\">\r\n            <div class=\"table-responsive\">\r\n                <table class='table table-striped table-condensed' *ngIf='regs && regs.length else elseBlock'>\r\n                    <thead>\r\n                        <tr>\r\n                            <th style=\"min-width: 80px;\">Registration#</th>\r\n                            <th style=\"min-width: 80px;\">Team Name</th>\r\n                            <th style=\"min-width: 80px;\">Team Description</th>\r\n                            <th style=\"min-width: 80px;\">Team Members</th>\r\n                            <th style=\"width:80px;\" *ngIf=\"event.status === 'Closed' \">Choose Winner</th>\r\n\r\n                        </tr>\r\n                    </thead>\r\n                    <tbody>\r\n                        <tr *ngFor='let reg of regs'>\r\n                            <td>{{ reg.regId }}</td>\r\n                            <td><a [routerLink]=\"reg.regId\">{{ reg.teamName }}</a></td>\r\n                            <td>{{ reg.teamDescription }}</td>\r\n                            <td>{{ reg.teamMembers }}</td>\r\n                            <td *ngIf=\"event.status === 'Closed' \">\r\n                                <div class=\"form-group\">\r\n                                    <input type=\"checkbox\" name=\"{{reg.regId}}\"  [(ngModel)]=reg.winner  />\r\n                                </div>\r\n                            </td>\r\n                        </tr>\r\n                    </tbody>\r\n                </table>\r\n                <ng-template #elseBlock>\r\n                    <h3>No Registrations Data Found</h3>\r\n                </ng-template>\r\n            </div>\r\n            <div class=\"form-group\" *ngIf=\"event.status === 'Closed' \">\r\n                <button type=\"submit\" class=\"btn btn-info\" [disabled]=\"formRef.invalid\">Save</button>\r\n            </div>\r\n\r\n        </form>\r\n\r\n\r\n\r\n    </div>\r\n</div>"
 
 /***/ }),
 
@@ -1274,8 +1390,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ViewRegistrationComponent", function() { return ViewRegistrationComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _users_users_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../users/users.service */ "./src/app/users/users.service.ts");
-/* harmony import */ var _registration_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./registration.service */ "./src/app/registration/registration.service.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _events_events_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../events/events.service */ "./src/app/events/events.service.ts");
+/* harmony import */ var _registration_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./registration.service */ "./src/app/registration/registration.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ngx-toastr */ "./node_modules/ngx-toastr/fesm5/ngx-toastr.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1289,25 +1407,52 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+
 var ViewRegistrationComponent = /** @class */ (function () {
-    function ViewRegistrationComponent(_regService, _userService, router, route) {
+    function ViewRegistrationComponent(toastr, _regService, _userService, _eventService, router, route) {
+        this.toastr = toastr;
         this._regService = _regService;
         this._userService = _userService;
+        this._eventService = _eventService;
         this.router = router;
         this.route = route;
-        this.title = "View Registrations";
+        this.title = 'View Registrations';
     }
     ViewRegistrationComponent.prototype.ngOnInit = function () {
         var _this = this;
         if (this._userService.isLoggedIn()) {
-            if (this._userService.getRole() == 'admin')
+            if (this._userService.getRole() === 'admin') {
+                this._eventService.getEvent(this.route.snapshot.params.id).subscribe(function (event) {
+                    _this.event = event;
+                });
                 this._regService.getReg(this.route.snapshot.params.id).subscribe(function (registrations) {
                     _this.regs = registrations;
+                    console.log(_this.regs);
                 });
+            }
         }
         else {
             this.router.navigate(['login']);
         }
+    };
+    ViewRegistrationComponent.prototype.onSubmit = function (formValue) {
+        var _this = this;
+        var winner;
+        for (var key in formValue) {
+            if (formValue[key] === true) {
+                winner = key;
+                break;
+            }
+        }
+        // formValue.members.push(localStorage.getItem("email"));
+        this.event.winner = winner;
+        this._eventService.updateEvent(this.event).subscribe(function (event) {
+            _this.toastr.success("Winner Declared and Published!!! :)");
+        });
+        this._regService.updateReg(winner).subscribe(function (val) {
+            _this.toastr.success("Winner Choosen!!! :)");
+        });
     };
     ViewRegistrationComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -1315,12 +1460,23 @@ var ViewRegistrationComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./view-registration.component.html */ "./src/app/registration/view-registration.component.html"),
             styles: [__webpack_require__(/*! ./view-registration.component.css */ "./src/app/registration/view-registration.component.css")]
         }),
-        __metadata("design:paramtypes", [_registration_service__WEBPACK_IMPORTED_MODULE_2__["RegistrationService"], _users_users_service__WEBPACK_IMPORTED_MODULE_1__["UsersService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"]])
+        __metadata("design:paramtypes", [ngx_toastr__WEBPACK_IMPORTED_MODULE_5__["ToastrService"], _registration_service__WEBPACK_IMPORTED_MODULE_3__["RegistrationService"], _users_users_service__WEBPACK_IMPORTED_MODULE_1__["UsersService"], _events_events_service__WEBPACK_IMPORTED_MODULE_2__["EventsService"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"]])
     ], ViewRegistrationComponent);
     return ViewRegistrationComponent;
 }());
 
 
+
+/***/ }),
+
+/***/ "./src/app/users/adduser-form.component.css":
+/*!**************************************************!*\
+  !*** ./src/app/users/adduser-form.component.css ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "div.panel.panel-primary.add-form{\r\n    margin : 5vh auto;\r\n    width: 50%;\r\n    font-size: 1.5em;\r\n}\r\n\r\ninput{\r\n    font-size: 1.2em;\r\n}"
 
 /***/ }),
 
@@ -1331,7 +1487,7 @@ var ViewRegistrationComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class='panel panel-primary'>    \r\n\t<div class='panel-heading'>\r\n\t\t{{title}}\r\n\t</div>\r\n\t<div class='panel-body'>    \r\n\t\t<form #formRef=\"ngForm\" (ngSubmit)=\"onSubmit(formRef.value)\">\r\n\t\t\t<div class=\"form-group\">\r\n\t\t\t  <label for=\"email\">Email</label>\r\n\t\t\t  <input type=\"email\" class=\"form-control\" id=\"email\" name=\"email\" [(ngModel)]=\"email\" required minlength=\"5\" #nameRef=\"ngModel\">\r\n\t\t\t  <div *ngIf=\"nameRef.invalid && (nameRef.dirty || nameRef.touched)\" class=\"alert alert-danger\">\r\n\t\t\t\t<div *ngIf=\"nameRef.errors.required\">\r\n\t\t\t\t  Email is required.\r\n\t\t\t\t</div>\r\n\t\t\t\t<div *ngIf=\"nameRef.errors.minlength\">\r\n\t\t\t\t  Email must be at least 3 characters long.\r\n\t\t\t\t</div>\r\n\t\t\t  </div>\r\n\t\t\t</div>\r\n\t\t\t<div class=\"form-group\">\r\n\t\t\t  <label for=\"firstName\">First Name</label>\r\n\t\t\t  <input type=\"text\" class=\"form-control\" id=\"firstName\" name=\"firstName\" [(ngModel)]=\"firstName\" required minlength=\"3\" #descRef=\"ngModel\">\r\n\t\t\t  <div *ngIf=\"descRef.invalid && (descRef.dirty || descRef.touched)\" class=\"alert alert-danger\">\r\n\t\t\t\t<div *ngIf=\"descRef.errors.required\">\r\n\t\t\t\t  First Name is required.\r\n\t\t\t\t</div>\r\n\t\t\t\t<div *ngIf=\"descRef.errors.minlength\">\r\n\t\t\t\t  First Name must be at least 3 characters long.\r\n\t\t\t\t</div>\r\n\t\t\t  </div>\r\n\t\t\t</div>\r\n\t\t\t<div class=\"form-group\">\r\n\t\t\t  <label for=\"lastName\">Last Name</label>\r\n\t\t\t  <input type=\"text\" class=\"form-control\" id=\"lastName\" name=\"lastName\" [(ngModel)]=\"lastName\" required minlength=\"3\" #descRef2=\"ngModel\">\r\n\t\t\t  <div *ngIf=\"descRef2.invalid && (descRef2.dirty || descRef2.touched)\" class=\"alert alert-danger\">\r\n\t\t\t\t<div *ngIf=\"descRef2.errors.required\">\r\n\t\t\t\t  Last Name is required.\r\n\t\t\t\t</div>\r\n\t\t\t\t<div *ngIf=\"descRef2.errors.minlength\">\r\n\t\t\t\t  Last Name must be at least 3 characters long.\r\n\t\t\t\t</div>\r\n\t\t\t  </div>\r\n\t\t\t</div>\r\n\t\t\t<div class=\"form-group\">\r\n\t\t\t  <label for=\"password\">Password</label>\r\n\t\t\t  <input type=\"password\" class=\"form-control\" id=\"password\" name=\"password\" [(ngModel)]=\"password\" required minlength=\"5\" #passwordRef=\"ngModel\">\r\n\t\t\t  <div *ngIf=\"passwordRef.invalid && (passwordRef.dirty || passwordRef.touched)\" class=\"alert alert-danger\">\r\n\t\t\t\t<div *ngIf=\"passwordRef.errors.required\">\r\n\t\t\t\t  Password is required.\r\n\t\t\t\t</div>\r\n\t\t\t\t<div *ngIf=\"passwordRef.errors.minlength\">\r\n\t\t\t\t  Password must be at least 5 characters long.\r\n\t\t\t\t</div>\r\n\t\t\t  </div>\r\n\t\t\t</div>\r\n\t\t\t<div class=\"form-group\">\r\n\t\t\t  <label for=\"location\">Location</label>\r\n\t\t\t  <input type=\"text\" class=\"form-control\" id=\"location\" name=\"location\" [(ngModel)]=\"location\" required minlength=\"3\" #locationRef=\"ngModel\">\r\n\t\t\t  <div *ngIf=\"locationRef.invalid && (locationRef.dirty || locationRef.touched)\" class=\"alert alert-danger\">\r\n\t\t\t\t<div *ngIf=\"locationRef.errors.required\">\r\n\t\t\t\t  Location is required.\r\n\t\t\t\t</div>\r\n\t\t\t\t<div *ngIf=\"locationRef.errors.minlength\">\r\n\t\t\t\t  Location must be at least 3 characters long.\r\n\t\t\t\t</div>\r\n\t\t\t  </div>\r\n\t\t\t</div>\r\n\t\t\t<div class=\"form-group\">\r\n\t\t\t  <label for=\"mobile\">Mobile</label>\r\n\t\t\t  <input type=\"text\" class=\"form-control\" id=\"mobile\" name=\"mobile\" [(ngModel)]=\"mobile\" required minlength=\"10\" #mobileRef=\"ngModel\">\r\n\t\t\t  <div *ngIf=\"mobileRef.invalid && (mobileRef.dirty || mobileRef.touched)\" class=\"alert alert-danger\">\r\n\t\t\t\t<div *ngIf=\"mobileRef.errors.required\">\r\n\t\t\t\t  Mobile is required.\r\n\t\t\t\t</div>\r\n\t\t\t\t<div *ngIf=\"mobileRef.errors.minlength\">\r\n\t\t\t\t  Mobile must be at least 10 characters long.\r\n\t\t\t\t</div>\r\n\t\t\t  </div>\r\n\t\t\t</div>\r\n\t\t\t\r\n\t\t\t\r\n\t\t\t<button type=\"submit\" class=\"btn btn-info\" [disabled]=\"formRef.invalid\">Submit</button>\r\n\t\t\t\r\n\t\t</form>    \r\n\t</div>\r\n</div>"
+module.exports = "<div class='panel panel-primary add-form'>\r\n\t<div class='panel-heading'>\r\n\t\t{{title}}\r\n\t</div>\r\n\t<div class='panel-body'>    \r\n\t\t<form #formRef=\"ngForm\" (ngSubmit)=\"onSubmit(formRef.value)\">\r\n\t\t\t<div class=\"form-group\">\r\n\t\t\t  <label for=\"email\">Email</label>\r\n\t\t\t  <input type=\"email\" class=\"form-control\" id=\"email\" name=\"email\" [(ngModel)]=\"email\" required minlength=\"5\" #nameRef=\"ngModel\">\r\n\t\t\t  <div *ngIf=\"nameRef.invalid && (nameRef.dirty || nameRef.touched)\" class=\"alert alert-danger\">\r\n\t\t\t\t<div *ngIf=\"nameRef.errors.required\">\r\n\t\t\t\t  Email is required.\r\n\t\t\t\t</div>\r\n\t\t\t\t<div *ngIf=\"nameRef.errors.minlength\">\r\n\t\t\t\t  Email must be at least 3 characters long.\r\n\t\t\t\t</div>\r\n\t\t\t  </div>\r\n\t\t\t</div>\r\n\t\t\t<div class=\"form-group\">\r\n\t\t\t  <label for=\"firstName\">First Name</label>\r\n\t\t\t  <input type=\"text\" class=\"form-control\" id=\"firstName\" name=\"firstName\" [(ngModel)]=\"firstName\" required minlength=\"3\" #descRef=\"ngModel\">\r\n\t\t\t  <div *ngIf=\"descRef.invalid && (descRef.dirty || descRef.touched)\" class=\"alert alert-danger\">\r\n\t\t\t\t<div *ngIf=\"descRef.errors.required\">\r\n\t\t\t\t  First Name is required.\r\n\t\t\t\t</div>\r\n\t\t\t\t<div *ngIf=\"descRef.errors.minlength\">\r\n\t\t\t\t  First Name must be at least 3 characters long.\r\n\t\t\t\t</div>\r\n\t\t\t  </div>\r\n\t\t\t</div>\r\n\t\t\t<div class=\"form-group\">\r\n\t\t\t  <label for=\"lastName\">Last Name</label>\r\n\t\t\t  <input type=\"text\" class=\"form-control\" id=\"lastName\" name=\"lastName\" [(ngModel)]=\"lastName\" required minlength=\"3\" #descRef2=\"ngModel\">\r\n\t\t\t  <div *ngIf=\"descRef2.invalid && (descRef2.dirty || descRef2.touched)\" class=\"alert alert-danger\">\r\n\t\t\t\t<div *ngIf=\"descRef2.errors.required\">\r\n\t\t\t\t  Last Name is required.\r\n\t\t\t\t</div>\r\n\t\t\t\t<div *ngIf=\"descRef2.errors.minlength\">\r\n\t\t\t\t  Last Name must be at least 3 characters long.\r\n\t\t\t\t</div>\r\n\t\t\t  </div>\r\n\t\t\t</div>\r\n\t\t\t<div class=\"form-group\">\r\n\t\t\t  <label for=\"password\">Password</label>\r\n\t\t\t  <input type=\"password\" class=\"form-control\" id=\"password\" name=\"password\" [(ngModel)]=\"password\" required minlength=\"5\" #passwordRef=\"ngModel\">\r\n\t\t\t  <div *ngIf=\"passwordRef.invalid && (passwordRef.dirty || passwordRef.touched)\" class=\"alert alert-danger\">\r\n\t\t\t\t<div *ngIf=\"passwordRef.errors.required\">\r\n\t\t\t\t  Password is required.\r\n\t\t\t\t</div>\r\n\t\t\t\t<div *ngIf=\"passwordRef.errors.minlength\">\r\n\t\t\t\t  Password must be at least 5 characters long.\r\n\t\t\t\t</div>\r\n\t\t\t  </div>\r\n\t\t\t</div>\r\n\t\t\t<div class=\"form-group\">\r\n\t\t\t  <label for=\"location\">Location</label>\r\n\t\t\t  <input type=\"text\" class=\"form-control\" id=\"location\" name=\"location\" [(ngModel)]=\"location\" required minlength=\"3\" #locationRef=\"ngModel\">\r\n\t\t\t  <div *ngIf=\"locationRef.invalid && (locationRef.dirty || locationRef.touched)\" class=\"alert alert-danger\">\r\n\t\t\t\t<div *ngIf=\"locationRef.errors.required\">\r\n\t\t\t\t  Location is required.\r\n\t\t\t\t</div>\r\n\t\t\t\t<div *ngIf=\"locationRef.errors.minlength\">\r\n\t\t\t\t  Location must be at least 3 characters long.\r\n\t\t\t\t</div>\r\n\t\t\t  </div>\r\n\t\t\t</div>\r\n\t\t\t<div class=\"form-group\">\r\n\t\t\t  <label for=\"mobile\">Mobile</label>\r\n\t\t\t  <input type=\"text\" class=\"form-control\" id=\"mobile\" name=\"mobile\" [(ngModel)]=\"mobile\" required minlength=\"10\" #mobileRef=\"ngModel\">\r\n\t\t\t  <div *ngIf=\"mobileRef.invalid && (mobileRef.dirty || mobileRef.touched)\" class=\"alert alert-danger\">\r\n\t\t\t\t<div *ngIf=\"mobileRef.errors.required\">\r\n\t\t\t\t  Mobile is required.\r\n\t\t\t\t</div>\r\n\t\t\t\t<div *ngIf=\"mobileRef.errors.minlength\">\r\n\t\t\t\t  Mobile must be at least 10 characters long.\r\n\t\t\t\t</div>\r\n\t\t\t  </div>\r\n\t\t\t</div>\r\n\t\t\t\r\n\t\t\t\r\n\t\t\t<button type=\"submit\" class=\"btn btn-info\" [disabled]=\"formRef.invalid\">Submit</button>\r\n\t\t\t\r\n\t\t</form>    \r\n\t</div>\r\n</div>"
 
 /***/ }),
 
@@ -1390,7 +1546,7 @@ var AddUserFormComponent = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'adduser-form',
             template: __webpack_require__(/*! ./adduser-form.component.html */ "./src/app/users/adduser-form.component.html"),
-            styles: ['.panel {margin:15px;}']
+            styles: [__webpack_require__(/*! ./adduser-form.component.css */ "./src/app/users/adduser-form.component.css")]
         }),
         __metadata("design:paramtypes", [_users_service__WEBPACK_IMPORTED_MODULE_2__["UsersService"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"], ngx_toastr__WEBPACK_IMPORTED_MODULE_3__["ToastrService"]])
     ], AddUserFormComponent);
@@ -1484,6 +1640,17 @@ var EditUserFormComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/users/login-form.component.css":
+/*!************************************************!*\
+  !*** ./src/app/users/login-form.component.css ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "div.panel.panel-primary.login-form{\r\n    margin : 10vh auto;\r\n    width: 50%;\r\n    font-size: 1.5em;\r\n}\r\n\r\ninput{\r\n    font-size: 1.2em;\r\n}"
+
+/***/ }),
+
 /***/ "./src/app/users/login-form.component.html":
 /*!*************************************************!*\
   !*** ./src/app/users/login-form.component.html ***!
@@ -1491,7 +1658,7 @@ var EditUserFormComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class='panel panel-primary'>    \r\n\t<div class='panel-heading'>\r\n\t\t{{title}}\r\n\t</div>\r\n\t<div class='panel-body'>    \r\n\t\t<form #formRef=\"ngForm\" (ngSubmit)=\"onSubmit(formRef.value)\">\r\n\t\t\t<div class=\"form-group\">\r\n\t\t\t  <label for=\"email\">Username (Email)</label>\r\n\t\t\t  <input type=\"email\" class=\"form-control\" id=\"email\" name=\"email\" [(ngModel)]=\"email\" required #nameRef=\"ngModel\">\r\n\t\t\t  <div *ngIf=\"nameRef.invalid && (nameRef.dirty || nameRef.touched)\" class=\"alert alert-danger\">\r\n\t\t\t\t<div *ngIf=\"nameRef.errors.required\">\r\n\t\t\t\t  Username is required.\r\n\t\t\t\t</div>\t\t\t\t\r\n\t\t\t  </div>\r\n\t\t\t</div>\r\n\t\t\t<div class=\"form-group\">\r\n\t\t\t  <label for=\"password\">Password</label>\r\n\t\t\t  <input type=\"password\" class=\"form-control\" id=\"password\" name=\"password\" [(ngModel)]=\"password\" required minlength=\"5\" #passRef=\"ngModel\">\r\n\t\t\t  <div *ngIf=\"passRef.invalid && (passRef.dirty || passRef.touched)\" class=\"alert alert-danger\">\r\n\t\t\t\t<div *ngIf=\"passRef.errors.required\">\r\n\t\t\t\t  Password is required.\r\n\t\t\t\t</div>\r\n\t\t\t\t<div *ngIf=\"passRef.errors.minlength\">\r\n\t\t\t\t  Password must be at least 5 characters long.\r\n\t\t\t\t</div>\t\t\t\t\r\n\t\t\t  </div>\r\n\t\t\t</div>\r\n\t\t\t<input style=\"margin-left: 5px;\" type=\"checkbox\" (click)=\"stateChanged($event)\" />&nbsp;SignIn as Admin\r\n\t\t\t<br/><br/>\r\n\t\t\t<button type=\"submit\" class=\"btn btn-info\" [disabled]=\"formRef.invalid\">Submit</button>\r\n\t\t\t\r\n\t\t</form>    \r\n\t</div>\r\n</div>"
+module.exports = "<div class='panel panel-primary login-form'>    \r\n\t<div class='panel-heading'>\r\n\t\t{{title}}\r\n\t</div>\r\n\t<div class='panel-body'>    \r\n\t\t<form #formRef=\"ngForm\" (ngSubmit)=\"onSubmit(formRef.value)\">\r\n\t\t\t<div class=\"form-group\">\r\n\t\t\t  <label for=\"email\">Username (Email)</label>\r\n\t\t\t  <input type=\"email\" class=\"form-control\" id=\"email\" name=\"email\" [(ngModel)]=\"email\" required #nameRef=\"ngModel\">\r\n\t\t\t  <div *ngIf=\"nameRef.invalid && (nameRef.dirty || nameRef.touched)\" class=\"alert alert-danger\">\r\n\t\t\t\t<div *ngIf=\"nameRef.errors.required\">\r\n\t\t\t\t  Username is required.\r\n\t\t\t\t</div>\t\t\t\t\r\n\t\t\t  </div>\r\n\t\t\t</div>\r\n\t\t\t<div class=\"form-group\">\r\n\t\t\t  <label for=\"password\">Password</label>\r\n\t\t\t  <input type=\"password\" class=\"form-control\" id=\"password\" name=\"password\" [(ngModel)]=\"password\" required minlength=\"5\" #passRef=\"ngModel\">\r\n\t\t\t  <div *ngIf=\"passRef.invalid && (passRef.dirty || passRef.touched)\" class=\"alert alert-danger\">\r\n\t\t\t\t<div *ngIf=\"passRef.errors.required\">\r\n\t\t\t\t  Password is required.\r\n\t\t\t\t</div>\r\n\t\t\t\t<div *ngIf=\"passRef.errors.minlength\">\r\n\t\t\t\t  Password must be at least 5 characters long.\r\n\t\t\t\t</div>\t\t\t\t\r\n\t\t\t  </div>\r\n\t\t\t</div>\r\n\t\t\t<input style=\"margin-left: 5px;\" type=\"checkbox\" (click)=\"stateChanged($event)\" />&nbsp;SignIn as Admin\r\n\t\t\t<br/><br/>\r\n\t\t\t<button type=\"submit\" class=\"btn btn-info\" [disabled]=\"formRef.invalid\">Submit</button>\r\n\t\t\t\r\n\t\t</form>    \r\n\t</div>\r\n</div>"
 
 /***/ }),
 
@@ -1565,7 +1732,7 @@ var LoginFormComponent = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'login-form',
             template: __webpack_require__(/*! ./login-form.component.html */ "./src/app/users/login-form.component.html"),
-            styles: ['.panel {margin:15px;}']
+            styles: [__webpack_require__(/*! ./login-form.component.css */ "./src/app/users/login-form.component.css")]
         }),
         __metadata("design:paramtypes", [_users_service__WEBPACK_IMPORTED_MODULE_2__["UsersService"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"], ngx_toastr__WEBPACK_IMPORTED_MODULE_3__["ToastrService"]])
     ], LoginFormComponent);
@@ -1594,7 +1761,7 @@ module.exports = "label {\r\n  display: inline-block;\r\n  width: 3em;\r\n  marg
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class='panel panel-primary'>\r\n    \r\n\t<div class='panel-heading'>\r\n      User Details\r\n\t</div>\r\n\t<div class='panel-body'>\t\t\r\n\t\t<table class=\"table\" style=\"margin-left:20px\">\r\n\t\t  <tr>\r\n\t\t\t<td>ID:</td>\r\n\t\t\t<td>{{user.id}}</td>\r\n\t\t  </tr>\r\n\t\t  <tr>\r\n\t\t\t<td>Name:</td>\r\n\t\t\t<td>{{user.name}}</td>\r\n\t\t  </tr>\r\n\t\t  <tr>\r\n\t\t\t<td>Description:</td>\r\n\t\t\t<td>{{user.description}}</td>\r\n\t\t  </tr>\r\n\t\t  <tr>\r\n\t\t\t<td>Start Date:</td>\r\n\t\t\t<td>{{user.startDate}}</td>\r\n\t\t  </tr>\r\n\t\t  <tr>\r\n\t\t\t<td>End Date:</td>\r\n\t\t\t<td>{{user.endDate}}</td>\r\n\t\t  </tr>\r\n\t\t  <tr>\r\n\t\t\t<td>Status:</td>\r\n\t\t\t<td>{{user.status}}</td>\r\n\t\t  </tr>\r\n\t\t  <tr>\r\n\t\t\t<td>No. of Teams:</td>\r\n\t\t\t<td>{{user.noOfTeams}}</td>\r\n\t\t  </tr>\r\n\t\t  <tr>\r\n\t\t\t<td>Max Team Size:</td>\r\n\t\t\t<td>{{user.maxTeamSize}}</td>\r\n\t\t  </tr>\r\n\t\t  <tr>\r\n\t\t\t<td>Prizes:</td>\r\n\t\t\t<td>{{user.prizes}}</td>\r\n\t\t  </tr>\r\n\t\t  <tr>\r\n\t\t\t<td>Hackathon Host:</td>\r\n\t\t\t<td>{{user.hackathonHost}}</td>\r\n\t\t  </tr>\r\n\t\t \r\n\t\t</table>\r\n\t\t<button (click)=\"goBack()\">Back</button>\r\n\t</div>\r\n</div>\r\n"
+module.exports = "<div class='panel panel-primary' style=\"font-size: 16px;\">\r\n    \r\n\t<div class='panel-heading'>\r\n      User Details\r\n\t</div>\r\n\t<div class='panel-body'>\t\t\r\n\t\t<table class=\"table\" style=\"margin-left:20px\">\r\n\t\t  <tr>\r\n\t\t\t<td>ID:</td>\r\n\t\t\t<td>{{user.id}}</td>\r\n\t\t  </tr>\r\n\t\t  <tr>\r\n\t\t\t<td>Name:</td>\r\n\t\t\t<td>{{user.name}}</td>\r\n\t\t  </tr>\r\n\t\t  <tr>\r\n\t\t\t<td>Description:</td>\r\n\t\t\t<td>{{user.description}}</td>\r\n\t\t  </tr>\r\n\t\t  <tr>\r\n\t\t\t<td>Start Date:</td>\r\n\t\t\t<td>{{user.startDate}}</td>\r\n\t\t  </tr>\r\n\t\t  <tr>\r\n\t\t\t<td>End Date:</td>\r\n\t\t\t<td>{{user.endDate}}</td>\r\n\t\t  </tr>\r\n\t\t  <tr>\r\n\t\t\t<td>Status:</td>\r\n\t\t\t<td>{{user.status}}</td>\r\n\t\t  </tr>\r\n\t\t  <tr>\r\n\t\t\t<td>No. of Teams:</td>\r\n\t\t\t<td>{{user.noOfTeams}}</td>\r\n\t\t  </tr>\r\n\t\t  <tr>\r\n\t\t\t<td>Max Team Size:</td>\r\n\t\t\t<td>{{user.maxTeamSize}}</td>\r\n\t\t  </tr>\r\n\t\t  <tr>\r\n\t\t\t<td>Prizes:</td>\r\n\t\t\t<td>{{user.prizes}}</td>\r\n\t\t  </tr>\r\n\t\t  <tr>\r\n\t\t\t<td>Hackathon Host:</td>\r\n\t\t\t<td>{{user.hackathonHost}}</td>\r\n\t\t  </tr>\r\n\t\t \r\n\t\t</table>\r\n\t\t<button (click)=\"goBack()\">Back</button>\r\n\t</div>\r\n</div>\r\n"
 
 /***/ }),
 

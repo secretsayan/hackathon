@@ -221,10 +221,40 @@ module.exports = {
         }
 
     },
+    getRegById: async function (id, callback) {
+        let res = [];
+        try {
+            let response = await Reg.findOne({ regId: id });
+            res['status'] = '200';
+            res['message'] = response;
+            callback(res);
+        }
+        catch (e) {
+            res['status'] = '400';
+            res['message'] = 'Invalid Input '+ e;
+            callback(res);
+        }
+
+    },
+
     checkRegs: async function (email, callback){
         let res = [];
         try {
             let response = await Reg.find({ teamMembers: email });
+            res['status'] = '200';
+            res['message'] = response;
+            callback(res);
+        }
+        catch (e){
+            res['status'] = '400';
+            res['message'] = 'Invalid Input '+ e;
+            callback(res);
+        }
+    },
+    updateRegs: async function (regId, callback){
+        let res = [];
+        try {
+            let response = await Reg.updateOne({ regId: regId },{ 'winner': 1});
             res['status'] = '200';
             res['message'] = response;
             callback(res);

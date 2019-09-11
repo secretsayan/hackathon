@@ -23,6 +23,19 @@ router.get('/all', function (req, res, next) {
     HackApi.getRegByEventId(req.params.id, function(results){
       res.status(results['status']).json(results['message']); 
     });    
-  }); 
+  });
+  
+  router.put('/winner/:id', function(req, res, next){
+    HackApi.updateRegs(req.params.id, function(results){
+      res.status(results['status']).json(results['message']); 
+    }); 
+  });
+
+  router.get('/:id', function (req, res, next) {
+    HackApi.getRegById(req.params.id,function (results){
+        res.status(results['status']).json(results['message']);
+    });
+});
+
 
   module.exports = router;

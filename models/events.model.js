@@ -11,7 +11,8 @@ const EventSchema = mongoose.Schema({
     noOfTeams: {type: Number, required: true},
     maxTeamSize: {type: Number, required: true},
     prizes: String,
-    hackathonHost: {type: String, required: true}
+    hackathonHost: {type: String, required: true},
+    winner: {type: Number}
 }); 
 
 EventSchema.plugin(AutoIncrement, {inc_field: 'eventId'});

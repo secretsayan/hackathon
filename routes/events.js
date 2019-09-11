@@ -13,7 +13,7 @@ router.get('/all', function (req, res, next) {
 });
 
 /* Get Event By ID. */
-router.get('/edit/:id', checkAdmin, function(req,res,next){
+router.get('/edit/:id', function(req,res,next){
   HackApi.getEventById(req.params.id, function(results){
     console.log(results);
     res.status(results['status']).json(results['message']);    

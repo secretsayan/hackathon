@@ -6,7 +6,8 @@ const RegSchema = mongoose.Schema({
     eventId: String,     
     teamName: {type: String, required: true },
     teamDescription: String,
-    teamMembers: [String]
+    teamMembers: [String],
+    winner: [Boolean]
 }); 
 
 RegSchema.plugin(AutoIncrement, {inc_field: 'regId'});
