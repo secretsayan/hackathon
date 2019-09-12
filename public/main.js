@@ -1134,6 +1134,7 @@ var EventsService = /** @class */ (function () {
         return this._http.get(getEventURL, this.httpOptions);
     };
     EventsService.prototype.addEvent = function (newEvent) {
+        console.log("In Addevent");
         console.log('id_token ' + localStorage.getItem('id_token'));
         console.log('currentUser: ' + localStorage.getItem('currentUser'));
         console.log('currentUser:jp: ' + JSON.parse(localStorage.getItem('currentUser')));
