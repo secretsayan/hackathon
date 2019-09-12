@@ -1107,7 +1107,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var EventsService = /** @class */ (function () {
     function EventsService(_http) {
         this._http = _http;
-        this._eventsUrl = 'event';
+        this._eventsUrl = 'http://localhost:3000/event';
         this.count = 100;
         this.httpOptions = {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
@@ -1303,7 +1303,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var RegistrationService = /** @class */ (function () {
     function RegistrationService(_http) {
         this._http = _http;
-        this._regUrl = "reg";
+        this._regUrl = "http://localhost:3000/reg";
         this.count = 100;
         this.httpOptions = {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
@@ -1377,7 +1377,7 @@ module.exports = "div.panel.panel-primary{\r\n    margin : 5vh auto;\r\n    widt
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class='panel panel-primary'>\r\n\r\n    <div class='panel-heading'>\r\n        {{title}}\r\n    </div>\r\n    <div class='panel-body'>\r\n        <br>\r\n\r\n        <form #formRef=\"ngForm\" (ngSubmit)=\"onSubmit(formRef.value)\">\r\n            <div class=\"table-responsive\">\r\n                <table class='table table-striped table-condensed' *ngIf='regs && regs.length else elseBlock'>\r\n                    <thead>\r\n                        <tr>\r\n                            <th style=\"min-width: 80px;\">Registration#</th>\r\n                            <th style=\"min-width: 80px;\">Team Name</th>\r\n                            <th style=\"min-width: 80px;\">Team Description</th>\r\n                            <th style=\"min-width: 80px;\">Team Members</th>\r\n                            <th style=\"width:80px;\" *ngIf=\"event.status === 'Closed' \">Choose Winner</th>\r\n\r\n                        </tr>\r\n                    </thead>\r\n                    <tbody>\r\n                        <tr *ngFor='let reg of regs'>\r\n                            <td>{{ reg.regId }}</td>\r\n                            <td><a [routerLink]=\"reg.regId\">{{ reg.teamName }}</a></td>\r\n                            <td>{{ reg.teamDescription }}</td>\r\n                            <td>{{ reg.teamMembers }}</td>\r\n                            <td *ngIf=\"event.status === 'Closed' \">\r\n                                <div class=\"form-group\">\r\n                                    <input type=\"checkbox\" name=\"{{reg.regId}}\"  [(ngModel)]=reg.winner  />\r\n                                </div>\r\n                            </td>\r\n                        </tr>\r\n                    </tbody>\r\n                </table>\r\n                <ng-template #elseBlock>\r\n                    <h3>No Registrations Data Found</h3>\r\n                </ng-template>\r\n            </div>\r\n            <div class=\"form-group\" *ngIf=\"event.status === 'Closed' \">\r\n                <button type=\"submit\" class=\"btn btn-info\" [disabled]=\"formRef.invalid\">Save</button>\r\n            </div>\r\n\r\n        </form>\r\n\r\n\r\n\r\n    </div>\r\n</div>"
+module.exports = "<div class='panel panel-primary'>\r\n\r\n    <div class='panel-heading'>\r\n        {{title}}\r\n    </div>\r\n    <div class='panel-body'>\r\n        <br>\r\n\r\n        <form #formRef=\"ngForm\" (ngSubmit)=\"onSubmit(formRef.value)\">\r\n            <div class=\"table-responsive\">\r\n                <table class='table table-striped table-condensed' *ngIf='regs && regs.length else elseBlock'>\r\n                    <thead>\r\n                        <tr>\r\n                            <th style=\"min-width: 80px;\">Registration#</th>\r\n                            <th style=\"min-width: 80px;\">Team Name</th>\r\n                            <th style=\"min-width: 80px;\">Team Description</th>\r\n                            <th style=\"min-width: 80px;\">Team Members</th>\r\n                            <th style=\"width:80px;\" *ngIf=\"event.status === 'Closed' \">Choose Winner</th>\r\n\r\n                        </tr>\r\n                    </thead>\r\n                    <tbody>\r\n                        <tr *ngFor='let reg of regs'>\r\n                            <td>{{ reg.regId }}</td>\r\n                            <td>{{ reg.teamName }}</td>\r\n                            <td>{{ reg.teamDescription }}</td>\r\n                            <td>{{ reg.teamMembers }}</td>\r\n                            <td *ngIf=\"event.status === 'Closed' \">\r\n                                <div class=\"form-group\">\r\n                                    <input type=\"checkbox\" name=\"{{reg.regId}}\"  [(ngModel)]=reg.winner  />\r\n                                </div>\r\n                            </td>\r\n                        </tr>\r\n                    </tbody>\r\n                </table>\r\n                <ng-template #elseBlock>\r\n                    <h3>No Registrations Data Found</h3>\r\n                </ng-template>\r\n            </div>\r\n            <div class=\"form-group\" *ngIf=\"event.status === 'Closed' \">\r\n                <button type=\"submit\" class=\"btn btn-info\" [disabled]=\"formRef.invalid\">Save</button>\r\n            </div>\r\n\r\n        </form>\r\n\r\n\r\n\r\n    </div>\r\n</div>"
 
 /***/ }),
 
@@ -1897,7 +1897,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var UsersService = /** @class */ (function () {
     function UsersService(_http) {
         this._http = _http;
-        this._usersUrl = "user";
+        this._usersUrl = "http://localhost:3000/user";
         this.httpOptions = {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpHeaders"]({
                 'Content-Type': 'application/json'
