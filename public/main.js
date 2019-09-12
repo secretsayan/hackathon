@@ -1116,6 +1116,10 @@ var EventsService = /** @class */ (function () {
             })
         };
         console.log('Initializing Events service ...');
+        console.log('id_token ' + localStorage.getItem('id_token'));
+        console.log('currentUser: ' + localStorage.getItem('currentUser'));
+        console.log('currentUser:jp: ' + JSON.parse(localStorage.getItem('currentUser')));
+        console.log('id_token jp:' + JSON.parse(localStorage.getItem('id_token')));
     }
     EventsService.prototype.getEventCount = function () {
         var eventss = this._http.get(this._eventsUrl + "/all").subscribe(function (events) { return eventss = events; }, function (err) { return console.log(err); });
@@ -1305,7 +1309,7 @@ var RegistrationService = /** @class */ (function () {
         this.httpOptions = {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
                 'Content-Type': 'application/json',
-                "Authorization": "Bearer " + localStorage.getItem("email")
+                "Authorization": "Bearer " + localStorage.getItem("id_token")
             })
         };
         console.log("Initializing Events service ...");
@@ -1969,6 +1973,8 @@ var UsersService = /** @class */ (function () {
         localStorage.removeItem("firstname");
         localStorage.removeItem("email");
         localStorage.removeItem("expires_at");
+        localStorage.removeItem("currentUser");
+        localStorage.removeItem("role");
     };
     UsersService.prototype.isLoggedIn = function () {
         return moment__WEBPACK_IMPORTED_MODULE_5__().isBefore(this.getExpiration());
