@@ -1134,7 +1134,7 @@ var EventsService = /** @class */ (function () {
         return this._http.get(getEventURL, this.httpOptions);
     };
     EventsService.prototype.addEvent = function (newEvent) {
-        console.log("In Addevent");
+        console.log("In add event");
         console.log('id_token ' + localStorage.getItem('id_token'));
         console.log('currentUser: ' + localStorage.getItem('currentUser'));
         console.log('currentUser:jp: ' + JSON.parse(localStorage.getItem('currentUser')));
@@ -1953,6 +1953,11 @@ var UsersService = /** @class */ (function () {
         localStorage.setItem('id_token', authResult.idToken);
         localStorage.setItem('role', authResult.role);
         localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()));
+        console.log("In set session");
+        console.log('id_token ' + localStorage.getItem('id_token'));
+        console.log('currentUser: ' + localStorage.getItem('currentUser'));
+        console.log('currentUser:jp: ' + JSON.parse(localStorage.getItem('currentUser')));
+        console.log('id_token jp:' + JSON.parse(localStorage.getItem('id_token')));
     };
     UsersService.prototype.getFirstName = function () {
         return localStorage.getItem("firstname");
