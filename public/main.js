@@ -658,7 +658,7 @@ var routing = _angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"].forRo
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "div.panel.panel-primary{\r\n    margin : 5vh auto;\r\n    width: 50%;\r\n    font-size: 1.5em;\r\n}\r\n\r\ninput, select{\r\n    font-size: 1em;\r\n}\r\n\r\n"
+module.exports = "div.panel.panel-primary{\r\n    margin : 5vh auto;\r\n    width: 70%;\r\n    font-size: 1.5em;\r\n}\r\n\r\ninput, select{\r\n    font-size: 1em;\r\n}\r\n\r\n"
 
 /***/ }),
 
@@ -747,7 +747,7 @@ var AddEventFormComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "div.panel.panel-primary{\r\n    margin : 5vh auto;\r\n    width: 50%;\r\n    font-size: 1.5em;\r\n}\r\n\r\ninput, select{\r\n    font-size: 1em;\r\n}"
+module.exports = "div.panel.panel-primary{\r\n    margin : 5vh auto;\r\n    width: 70%;\r\n    font-size: 1.5em;\r\n}\r\n\r\ninput, select{\r\n    font-size: 1em;\r\n}"
 
 /***/ }),
 
@@ -1168,7 +1168,7 @@ var EventsService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "div.panel.panel-primary{\r\n    margin : 5vh auto;\r\n    width: 50%;\r\n    font-size: 1.5em;\r\n}\r\n\r\ninput{\r\n    font-size: 1.2em;\r\n}"
+module.exports = "div.panel.panel-primary{\r\n    margin : 5vh auto;\r\n    width: 70%;\r\n    font-size: 1.5em;\r\n}\r\n\r\ninput{\r\n    font-size: 1.2em;\r\n}"
 
 /***/ }),
 
@@ -1479,7 +1479,7 @@ var ViewRegistrationComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "div.panel.panel-primary.add-form{\r\n    margin : 5vh auto;\r\n    width: 50%;\r\n    font-size: 1.5em;\r\n}\r\n\r\ninput{\r\n    font-size: 1.2em;\r\n}"
+module.exports = "div.panel.panel-primary.add-form{\r\n    margin : 5vh auto;\r\n    width: 70%;\r\n    font-size: 1.5em;\r\n}\r\n\r\ninput{\r\n    font-size: 1.2em;\r\n}"
 
 /***/ }),
 
@@ -1650,7 +1650,7 @@ var EditUserFormComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "div.panel.panel-primary.login-form{\r\n    margin : 10vh auto;\r\n    width: 50%;\r\n    font-size: 1.5em;\r\n}\r\n\r\ninput{\r\n    font-size: 1.2em;\r\n}"
+module.exports = "div.panel.panel-primary.login-form{\r\n    margin : 10vh auto;\r\n    width: 70%;\r\n    font-size: 1.5em;\r\n}\r\n\r\ninput{\r\n    font-size: 1.2em;\r\n}"
 
 /***/ }),
 
